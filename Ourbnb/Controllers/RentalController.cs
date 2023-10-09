@@ -4,7 +4,7 @@ namespace Ourbnb.Controllers
 {
     public class RentalController : Controller
     {
-        public IActionResult Rentals()
+        public IActionResult rentalspage()
         {
             return View();
         }

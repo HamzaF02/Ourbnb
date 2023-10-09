@@ -18,7 +18,12 @@ namespace Ourbnb.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult rentalsPage()
+        {
+            return View();
+        }
+
+        public IActionResult YourOrders()
         {
             return View();
         }
