@@ -1,4 +1,6 @@
-﻿namespace Ourbnb.Models
+﻿using MyShop.Models;
+
+namespace Ourbnb.Models
 {
     public class Rental
     {
@@ -11,6 +13,8 @@
         public string Location { get; set; }
         public int Price { get; set; }
 
+        public int OwnerId { get; set; }
+        public Customer Owner { get; set; }
 
     }
 }
