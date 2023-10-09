@@ -1,4 +1,4 @@
-﻿namespace MyShop.Models;
+﻿namespace Ourbnb.Models;
 
 public class Customer
 {

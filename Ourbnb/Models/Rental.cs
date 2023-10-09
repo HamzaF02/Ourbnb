@@ -1,6 +1,4 @@
-﻿using MyShop.Models;
-
-namespace Ourbnb.Models
+﻿namespace Ourbnb.Models
 {
     public class Rental
     {

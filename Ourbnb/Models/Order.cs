@@ -1,6 +1,4 @@
-﻿using MyShop.Models;
-
-namespace Ourbnb.Models
+﻿namespace Ourbnb.Models
 {
     public class Order
     {
@@ -12,6 +10,8 @@ namespace Ourbnb.Models
         public int totalPrice { get; set; }
         public DateOnly From { get; set; }
         public DateOnly To { get; set; }
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
+
+        
     }
 }
