@@ -1,7 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using Ourbnb.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<RentalDbContext>(options =>
+{
+    options.UseSqlite(
+        builder.Configuration["ConnectionStrings:ItemDbContextConnection"]);
+
+});
 
 var app = builder.Build();
 
