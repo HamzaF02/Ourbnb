@@ -1,5 +1,5 @@
 ﻿using System;
-using Castle.Core.Resource;
+using Microsoft.EntityFrameworkCore;
 using Ourbnb.Models;
 
 namespace Ourbnb.DAL
