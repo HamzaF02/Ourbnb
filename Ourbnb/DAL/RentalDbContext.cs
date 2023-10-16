@@ -12,6 +12,11 @@ namespace Ourbnb.DAL
 		public DbSet<Rental> Rentals { get; set; }
 		public DbSet<Customer> Customers { get; set; }
 		public DbSet<Order> Orders { get; set; }
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			optionsBuilder.UseLazyLoadingProxies();
+		}
 	}
 }
 

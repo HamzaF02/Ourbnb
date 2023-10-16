@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 using Ourbnb.Models;
 
 namespace Ourbnb.DAL
@@ -13,6 +12,7 @@ namespace Ourbnb.DAL
             RentalDbContext context = serviceScope.ServiceProvider.GetRequiredService<RentalDbContext>();
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
+
 
             if (!context.Customers.Any())
             {
@@ -55,7 +55,7 @@ namespace Ourbnb.DAL
                         OwnerId=1,
                         FromDate=new DateOnly(2023, 10, 21),
                         ToDate=new DateOnly(2023, 10, 30),
-                        Bilder= "https://hellvikhytte.no/content/uploads/sites/14/2021/08/Fjellerke-3-scaled.jpg",
+                        Bilder = "https://hellvikhytte.no/content/uploads/sites/14/2021/08/Fjellerke-3-scaled.jpg",
                         Rating=4.5,
                     },
                     new Rental
