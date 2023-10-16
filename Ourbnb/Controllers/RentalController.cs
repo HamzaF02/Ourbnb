@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Ourbnb.DAL;
 using Ourbnb.Models;
+using System.Drawing.Printing;
 
 namespace Ourbnb.Controllers
 {
