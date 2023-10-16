@@ -3,36 +3,38 @@
 <h1>List of Rentals (@ViewBag.CurrentViewName View)</h1>
 <a href="/Rental/Table">Table View</a>
 
+<link rel="stylesheet" href="/css/site.css">
+
 <div class="row row-cols-1 row-cols-lg-3  row-cols-md-2  row-cols-sm-1  ">
     @foreach (var rental in Model)
     {
-       <div class="d-flex justify-content-between mt-1">
-           <div class="col" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; padding: 30px;">
-               <div>
-                   <img src="@rental.Bilder" class="card-img-top" alt="@rental.Name">
-                   <div>
-                       <div class="d-flex justify-content-between mt-1">
-                           <h5 class="text-start">
-                               @rental.Name
-                           </h5>
-                           <h6 class="text-nowrap">
-                               <p>Price per/n:</p>
-                               @rental.Price.ToString("0.00 NOK")
-                           </h6>
-                       </div>
-                       <div class="d-flex justify-content-between mt-1">
-                           <h6 class="text-nowrap">
-                               <p>Rating</p>
-                               @rental.Rating
-                           </h6>
-                           <h6 class="text-nowrap">
-                               <p>Location</p>
-                               @rental.Location
-                           </h6>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
+        <div class="d-flex justify-content-between mt-1 ">
+            <div class="col " style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; padding: 50px; margin-top: 20px; border-radius: 10px; background-color: white">
+                <div>
+                    <img src="@rental.Bilder" class="card-img-top" alt="@rental.Name">
+                    <div>
+                        <div class="d-flex justify-content-between mt-1">
+                            <h5 class="text-start">
+                                @rental.Name
+                            </h5>
+                        </div>
+                        <div class="d-flex justify-content-between mt-1">
+                            <h6 class="text-nowrap">
+                                <p>Rating</p>
+                                @rental.Rating
+                            </h6>
+                            <h6 class="text-nowrap">
+                                <p>Location</p>
+                                @rental.Location
+                            </h6>
+                            <h6 class="text-nowrap">
+                                <p>Price per/n:</p>
+                                @rental.Price.ToString("0.00 NOK")
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 </div>
