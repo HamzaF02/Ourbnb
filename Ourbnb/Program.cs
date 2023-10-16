@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<RentalDbContext>(options =>
 {
     options.UseSqlite(
-        builder.Configuration["ConnectionStrings:ItemDbContextConnection"]);
+        builder.Configuration["ConnectionStrings:RentalDbContextConnection"]);
 
 });
 
