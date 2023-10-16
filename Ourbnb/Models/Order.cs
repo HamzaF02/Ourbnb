@@ -7,9 +7,9 @@
         public DateOnly To { get; set; }
         public int? Rating { get; set; }
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; } = default!;
+        public virtual Customer Customer { get; set; } = default!;
         public int RentalId { get; set; }
-        public Rental Rental { get; set;} = default!;
+        public virtual Rental Rental { get; set;} = default!;
         public int TotalPrice { get; set; }
     }
 }

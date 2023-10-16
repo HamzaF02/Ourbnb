@@ -14,8 +14,8 @@ namespace Ourbnb.Models
         public int Price { get; set; }
         public string Bilder { get; set; } = string.Empty;
         public int OwnerId { get; set; }
-        public Customer Owner { get; set; } = default!;
+        public virtual Customer Owner { get; set; } = default!;
 
-        public List<Order>? Orders { get; set; }
+        public virtual List<Order>? Orders { get; set; }
     }
 }
