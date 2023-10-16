@@ -7,7 +7,7 @@ namespace Ourbnb.DAL
 	{
 		public RentalDbContext(DbContextOptions<RentalDbContext> options) : base(options)
 		{
-			Database.EnsureCreated();
+			//Database.EnsureCreated();
 		}
 		public DbSet<Rental> Rentals { get; set; }
 		public DbSet<Customer> Customers { get; set; }
