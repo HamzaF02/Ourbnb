@@ -8,12 +8,12 @@
         public DateOnly FromDate { get; set; }
         public DateOnly ToDate { get; set; }
         public double Rating { get; set; }
-        public string Location { get; set; }
+        public string Location { get; set; } = string.Empty;
         public int Price { get; set; }
-        public List<string> Bilder { get; set; }
+        public List<string>? Bilder { get; set; }
 
         public int OwnerId { get; set; }
-        public Customer Owner { get; set; }
+        public Customer Owner { get; set; } = default!;
 
 
 
