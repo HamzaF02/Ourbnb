@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="ViewModel\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,5 +28,8 @@
 
   <ItemGroup>
     <None Remove="DAL\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\images\" />
   </ItemGroup>
 </Project>

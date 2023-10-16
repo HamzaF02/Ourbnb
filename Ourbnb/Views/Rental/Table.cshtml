@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Ourbnb.Models.Rental>
+
+<h1>List of Rentals (@ViewBag.CurrentViewName View)</h1>
+<a href="/Rental/Grid">Grid View</a>
+
+<div class="container">
+    <table class='table table-striped'>
+        <tr><th>Rentalid</th><th>Name</th><th>Desription</th><th>Fromdate</th><th>Todate</th><th>Rating</th><th>Location</th><th>Price</th><th>Owner</th></tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.RentalId</td>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.FromDate</td>
+                <td>@item.ToDate</td>
+                <td>@item.Rating</td>
+                <td>@item.Location</td>
+                <td>@item.Price.ToString("0.00 NOK")</td>
+                <td>@item.Owner.FirstName  @item.Owner.LastName</td>
+                <td></td>
+            </tr>
+        }
+    </table>
+</div>
