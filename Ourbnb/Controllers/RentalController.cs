@@ -6,18 +6,22 @@ namespace Ourbnb.Controllers
 {
     public class RentalController : Controller
     {
-      
-     
+        private readonly RentalDbContext _rentalDbContext;
+        public RentalController(RentalDbContext rentalDbContext)
+        {
+            _rentalDbContext = rentalDbContext;
+        }
+
         public IActionResult Table()
         {
-            var rentals = GetRentals();
+            var rentals = _rentalDbContext.Rentals.ToList();
             ViewBag.CurrentViewName = "Table";
             return View(rentals);
         }
 
         public IActionResult Grid()
         {
-            var rentals = GetRentals();
+            var rentals = _rentalDbContext.Rentals.ToList();
             ViewBag.CurrentViewName = "Grid";
             return View(rentals);
         }
