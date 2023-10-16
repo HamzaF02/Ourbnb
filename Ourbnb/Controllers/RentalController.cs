@@ -46,7 +46,7 @@ namespace Ourbnb.Controllers
                 Rating = 3.5,
                 Location = "Gran",
                 Price = 150,
-                Bilder = {},
+                Bilder = "/images/1.jpeg",
                 OwnerId = 1,
                 Owner = owner1
             };
@@ -61,7 +61,7 @@ namespace Ourbnb.Controllers
                 Rating = 3.5,
                 Location = "Gran",
                 Price = 150,
-                Bilder = {},
+                Bilder = "/images/1.jpeg",
                 OwnerId = 1,
                 Owner = owner1
             };
@@ -76,7 +76,7 @@ namespace Ourbnb.Controllers
                 Rating = 3.5,
                 Location = "Gran",
                 Price = 150,
-                Bilder = { },
+                Bilder = "/images/modernhouse.jpg",
                 OwnerId = 1,
                 Owner = owner1
             };
@@ -91,7 +91,7 @@ namespace Ourbnb.Controllers
                 Rating = 3.5,
                 Location = "Gran",
                 Price = 150,
-                Bilder = { },
+                Bilder = "/images/mountain.jpeg",
                 OwnerId = 1,
                 Owner = owner1
             };

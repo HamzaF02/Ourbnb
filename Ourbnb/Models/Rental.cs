@@ -12,7 +12,7 @@ namespace Ourbnb.Models
         public double Rating { get; set; }
         public string Location { get; set; } = string.Empty;
         public int Price { get; set; }
-        //public List<string>? Bilder { get; set; }
+        public string Bilder { get; set; } = string.Empty;
         public int OwnerId { get; set; }
         public Customer Owner { get; set; } = default!;
 
