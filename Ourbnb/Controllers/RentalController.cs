@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Ourbnb.DAL;
 using Ourbnb.Models;
-using System.Drawing.Printing;
-
+using Microsoft.EntityFrameworkCore;
 namespace Ourbnb.Controllers
 {
     public class RentalController : Controller

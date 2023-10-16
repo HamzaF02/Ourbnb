@@ -52,7 +52,7 @@ namespace Ourbnb.DAL
                         OwnerId=1,
                         FromDate=new DateOnly(2023, 10, 30),
                         ToDate=new DateOnly(2023, 10, 21),
-                        Bilder= new List<String> {"https://hellvikhytte.no/content/uploads/sites/14/2021/08/Fjellerke-3-scaled.jpg"},
+                        //Bilder= new List<String> {"https://hellvikhytte.no/content/uploads/sites/14/2021/08/Fjellerke-3-scaled.jpg"},
                         Rating=4.5,
                     }
                 };
