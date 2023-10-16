@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using Ourbnb.Models;
 
 namespace Ourbnb.DAL
@@ -10,6 +11,8 @@ namespace Ourbnb.DAL
 		{
             using var serviceScope = app.ApplicationServices.CreateScope();
             RentalDbContext context = serviceScope.ServiceProvider.GetRequiredService<RentalDbContext>();
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
 
             if (!context.Customers.Any())
             {
