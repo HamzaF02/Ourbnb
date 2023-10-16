@@ -22,12 +22,22 @@ namespace Ourbnb.DAL
                         Address="Pilestreden 32",
                         Email="Hamza@gmail.com",
                         Phone=91824521
+                    },
+
+                    new Customer
+                    {
+                        FirstName="Mahdi",
+                        LastName="Yusuf",
+                        Address="Pilestredet 35",
+                        Email="Mahdi123@gmail.com",
+                        Phone=47782356
                     }
-                    
+                
                 };
                 context.AddRange(customer);
                 context.SaveChanges();
             }
+
 
             if (!context.Rentals.Any())
             {
@@ -50,6 +60,21 @@ namespace Ourbnb.DAL
                 context.SaveChanges();
             }
 
+            if (!context.Orders.Any())
+            {
+                var orders = new List<Order>
+                {
+                    new Order
+                    {
+                        CustomerId = 1,
+                        RentalId = 1,
+                        From = new DateOnly(2023, 10, 30),
+                        To = new DateOnly(2023, 10, 21),
+                    }
+                };
+                context.AddRange(orders);
+                context.SaveChanges();
+            }
 			
         }
 	}
