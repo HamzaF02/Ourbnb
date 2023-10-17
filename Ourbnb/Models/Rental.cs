@@ -9,7 +9,7 @@ namespace Ourbnb.Models
         public string Description { get; set; } = string.Empty;
         public DateOnly FromDate { get; set; }
         public DateOnly ToDate { get; set; }
-        public double Rating { get; set; }
+        public double? Rating { get; set; } = default!;
         public string Location { get; set; } = string.Empty;
         public int Price { get; set; }
         public string Bilder { get; set; } = string.Empty;
@@ -17,5 +17,6 @@ namespace Ourbnb.Models
         public virtual Customer Owner { get; set; } = default!;
 
         public virtual List<Order>? Orders { get; set; }
+        
     }
 }
