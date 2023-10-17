@@ -15,8 +15,8 @@
     @foreach (var rental in Model)
     {
 
-        <div class="d-flex justify-content-between mt-1 "  style="height:35rem">
-            <div class="col " style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; padding: 50px; margin-top: 20px; border-radius: 10px; background-color: white">
+        <div class="d-flex justify-content-between mt-1"  style="height:35rem">
+            <div class="col card " style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; padding: 50px; margin-top: 20px; border-radius: 10px; background-color: white">
                 <div>
                     <img src="@rental.Bilder" class="card-img-top" alt="@rental.Name">
                     <div>
@@ -26,7 +26,7 @@
                                
                             </h5>
                         </div>
-                        <div class="d-flex justify-content-between mt-1" style="margin-top: 20px;">
+                        <div class="d-flex justify-content-between mt-1">
                             <h6 class="text-nowrap" >
                                 <p >Rating</p>
                                 @rental.Rating
@@ -47,3 +47,18 @@
         </div>
     }
 </div>
+
+
+<style>
+    .card:hover {
+        border-style: solid;
+        border-color: #6b99bf;
+        border-width: 5px;
+        transform: scaleY(1.01);
+        transform-origin: top;
+        transform-origin: bottom;
+        transform-origin: left;
+        transform-origin: right;
+    }
+</style>
+
