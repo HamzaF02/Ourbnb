@@ -11,6 +11,17 @@
     <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 
 </head>
+<style>
+
+    #reg:hover {
+        color: white;
+    }
+
+    #reg{
+        color:black;
+    }
+
+</style>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; height:80px">
@@ -31,8 +42,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark">Your Orders</a>
                         </li>
+                    
+                       
                     </ul>
+                  
                     @* <partial name="_LoginPartial" /> *@
+                </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <ul class ="navbar-nav flex-grow-2">
+                        <li class="nav-item" style=" margin-left:10px; margin-right:10px; font-weight:1000;">
+                            <form style="display: inline">
+                                <button class="btn btn-primary align-items-end" style="height: 3rem; color:white">Login</button>
+                            </form>
+                        </li>
+                        <li class="nav-item" style=" margin-left:10px; margin-right:10px; border-radius: 30px;font-weight:1000;">
+                            <form style="display: inline">
+                                <button id="reg" class="btn btn-outline-secondary align-items-end" style="height: 3rem;">Register</button>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -45,5 +73,8 @@
     </div>
 
 
+
+
 </body>
+
 </html>
