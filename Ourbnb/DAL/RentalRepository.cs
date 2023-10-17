@@ -12,10 +12,16 @@ namespace Ourbnb.DAL
 			_db = db;
 		}
 
-        public async Task Create(Rental rental)
+        public async Task<bool> Create(Rental rental)
         {
-            _db.Rentals.Add(rental);
-            await _db.SaveChangesAsync();
+            try { 
+                _db.Rentals.Add(rental);
+                await _db.SaveChangesAsync();
+                return true;
+            }catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public async Task<bool> Delete(int id)
@@ -41,10 +47,18 @@ namespace Ourbnb.DAL
             return await _db.Rentals.ToListAsync();
         }
 
-        public async Task Update(Rental rental)
+        public async Task<bool> Update(Rental rental)
         {
-            _db.Rentals.Add(rental);
-            await _db.SaveChangesAsync();
+            try
+            {
+                _db.Rentals.Add(rental);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

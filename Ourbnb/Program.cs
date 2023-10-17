@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Ourbnb.DAL;
+using Ourbnb.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<RentalDbContext>(options =>
         builder.Configuration["ConnectionStrings:RentalDbContextConnection"]);
 
 });
+builder.Services.AddScoped<IRepository<Rental>, RentalRepository>();
 
 var app = builder.Build();
 
