@@ -2,28 +2,49 @@
 using Ourbnb.DAL;
 using Ourbnb.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 namespace Ourbnb.Controllers
 {
     public class RentalController : Controller
     {
-        private readonly RentalDbContext _rentalDbContext;
-        public RentalController(RentalDbContext rentalDbContext)
+        private readonly IRepository<Rental> _repository;
+        public RentalController(IRepository<Rental> rentalRepository)
         {
-            _rentalDbContext = rentalDbContext;
+            _repository = rentalRepository;
         }
 
         public async Task<IActionResult> Table()
         {
-            var rentals = await _rentalDbContext.Rentals.ToListAsync();
+            var rentals =  await _repository.GetAll();
             ViewBag.CurrentViewName = "Table";
             return View(rentals);
         }
 
         public async Task<IActionResult> Grid()
         {
-            var rentals = await _rentalDbContext.Rentals.ToListAsync();
             ViewBag.CurrentViewName = "Grid";
+            var rentals = await _repository.GetAll();
             return View(rentals);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(Rental rental)
+        {
+            if (ModelState.IsValid)
+            {
+                bool OK = await _repository.Create(rental);
+                if (OK)
+                {
+                    return RedirectToAction(nameof(Grid));
+                }
+            }
+            return View(rental);
         }
     }
 }

@@ -6,8 +6,8 @@ namespace Ourbnb.DAL
 	{
 		Task<IEnumerable<T>> GetAll();
 		Task<T?> getObjectById(int id);
-		Task Create(T t);
-		Task Update(T t);
+		Task<bool> Create(T t);
+		Task<bool> Update(T t);
 		Task<bool> Delete(int id);
 	}
 }
