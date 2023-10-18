@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Ourbnb.Models.Order>
+
+<h1>Your Orders</h1>
+
+@foreach (var order in Model)
+{
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+        <div class="container">
+            <h5>Order @order.OrderId </h5>
+            <div>
+                <table class='table table-striped' style='max-width: 1200px;'>
+                    <tr class="table-header">
+                        <th>Order Start Date</th>
+                        <th>Order End Date</th>
+                        <th>CustomerId</th>
+                        <th>Customer Name</th>
+                        <th>Address</th>
+                    </tr>
+                    <tr>
+                        <td>@order.From</td>
+                        <td>@order.To</td>
+                        <td>@order.CustomerId</td>
+                        <td>@order.Customer.FirstName @order.Customer.LastName</td>
+                        <td>@order.Customer.Address</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </div>
+}
+
