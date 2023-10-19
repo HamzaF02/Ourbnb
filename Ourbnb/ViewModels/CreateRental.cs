@@ -4,7 +4,7 @@ using DocuSign.eSign.Model;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Ourbnb.Models;
 
-namespace MyShop.ViewModels
+namespace Ourbnb.ViewModels
 {
     public class CreateRental
     {

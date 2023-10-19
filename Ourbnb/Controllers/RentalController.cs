@@ -3,7 +3,7 @@ using Ourbnb.DAL;
 using Ourbnb.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using MyShop.ViewModels;
+using Ourbnb.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Configuration;
 
