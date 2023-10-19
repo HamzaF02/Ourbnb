@@ -28,6 +28,17 @@ namespace Ourbnb.Controllers
             return View(rentals);
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var rental = await _repository.getObjectById(id);
+            if(rental == null)
+            {
+                return NotFound("Nothing here");
+            }
+        
+            return View(rental);
+        }
+
         [HttpGet]
         public IActionResult Create()
         {

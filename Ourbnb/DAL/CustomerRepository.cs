@@ -1,25 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Ourbnb.Migrations;
 using Ourbnb.Models;
+using System;
 
 namespace Ourbnb.DAL
 {
-    public class OrderRepository : IRepository<Order>
+    public class CustomerRepository : IRepository<Customer>
     {
         private readonly RentalDbContext _db;
-        public OrderRepository(RentalDbContext db)
+        public CustomerRepository(RentalDbContext db)
         {
             _db = db;
         }
 
-        public async Task<bool> Create(Order order)
+        public async Task<bool> Create(Customer customer)
         {
             try
             {
-                _db.Orders.Add(order);
+                _db.Customers.Add(customer);
                 await _db.SaveChangesAsync();
                 return true;
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return false;
             }
@@ -27,35 +28,36 @@ namespace Ourbnb.DAL
 
         public async Task<bool> Delete(int id)
         {
-            var order = await _db.Orders.FindAsync(id);
-            if (order == null)
+            var customer = await _db.Customers.FindAsync(id);
+            if (customer == null)
             {
                 return false;
             }
 
-            _db.Orders.Remove(order);
+            _db.Customers.Remove(customer);
             await _db.SaveChangesAsync();
             return true;
         }
 
-        public async Task<IEnumerable<Order>> GetAll()
+        public async Task<IEnumerable<Customer>> GetAll()
         {
-            return await _db.Orders.ToListAsync();
+            return await _db.Customers.ToListAsync();
         }
 
-        public async Task<Order?> getObjectById(int id)
+        public async Task<Customer?> getObjectById(int id)
         {
-            return await _db.Orders.FindAsync(id);
+            return await _db.Customers.FindAsync(id);
         }
 
-        public async Task<bool> Update(Order order)
+        public async Task<bool> Update(Customer customer)
         {
             try
             {
-                _db.Orders.Add(order);
+                _db.Customers.Add(customer);
                 await _db.SaveChangesAsync();
                 return true;
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return false;
             }

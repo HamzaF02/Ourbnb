@@ -1,15 +1,48 @@
 ﻿@model Rental
 
-<h3 class="my-5">
+<style>
+    h5{
+        margin-top:20px;
+    }
+
+    .info{
+        margin-top: 10rem;
+        margin-left: 5px;
+        margin-right: 5px;
+        height:3rem;
+    }
+
+    .info>a{
+        color:black;
+        text-decoration:none;
+    }
+
+</style>
+
+<h2 class="my-5">
     @Model.Name
-</h3>
+</h2>
 
 <div class="row gx-5">
-    <img alt="@Model.Name" src="@Model.Bilder" class="img-fluid col-5" />
+    <img style="" alt="@Model.Name" src="@Model.Bilder" class="img-fluid col-5" />
     <div class="col-7">
+       
+        <h3 class="pull-right">Location: @Model.Location</h3>
+        <h5 class="pull-right">Owner:@Model.Owner.FirstName @Model.Owner.LastName</h5>
         <h5>@Model.Description</h5>
-        <h3 class="pull-right">@Model.Price.ToString("0.00 NOK")</h3>
-        <p><a href="/Rental/Table">Back to Table View</a></p>
-        <p><a href="/Rental/Grid">Back to Grid View</a></p>
+        <h5 class="pull-right">Price per/n: @Model.Price.ToString("0.00 NOK")</h5>
+        <h5 class="pull-right">Rating: @Model.Rating</h5>
+
+        <button class="btn btn-outline-success info">
+            <a href="/Rental/Grid">Rent out</a>
+        </button>
+        <button class="btn btn-outline-info info">
+            <a href="/Rental/Table">Back to Table View</a>
+        </button>
+
+        <button class="btn btn-outline-info info">
+            <a href="/Rental/Grid">Back to Grid View</a>
+        </button>
+
     </div>
 </div>

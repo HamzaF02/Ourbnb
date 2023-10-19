@@ -1,4 +1,4 @@
-﻿using DocuSign.eSign.Model;
+﻿
 using System.ComponentModel.DataAnnotations;
 
 namespace Ourbnb.Models
@@ -9,11 +9,9 @@ namespace Ourbnb.Models
         public int CustomerId { get; set; }
 
         [RegularExpression(@"[a-zA-ZæøåÆØÅ]{1,20}", ErrorMessage = "First Name must be letters between 1 to 20 charachters")]
-        [Display(FirstName = "Firstname")]
         public string FirstName { get; set; } = string.Empty;
 
         [RegularExpression(@"[a-zA-ZæøåÆØÅ]{1,20}", ErrorMessage = "Last Name must be letters between 1 to 20 charachters")]
-        [Display(LastName = "Lastname")]
         public string LastName { get; set; } = string.Empty;
 
         [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{1,50}", ErrorMessage = "Adress must be letters and numbers between 1 to 50 charachters")]
