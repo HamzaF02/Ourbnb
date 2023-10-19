@@ -50,10 +50,11 @@
 
     }
     <a asp-controller="Rental" asp-action="Create" style="text-decoration:none" class="link-dark">
-            <div class="d-flex justify-content-between mt-1" style="height:35rem;">
-            <div class="col" style="padding: 50px; margin-top: 20px; border-radius: 10px; border:dashed 6px;border-color: black; background-color:#8baec9;text-align:center">
-                 <h2>+</h2>
-                 <p>Post new Rental!</p>
+
+            <div class="d-flex  justify-content-between mt-1" style="height:35rem;">
+            <div class="col addcard" >
+                 <h1 class="add">+</h1>
+                 <p class="add">Post new Rental!</p>
                </div>
             </div>
     </a>
@@ -81,6 +82,24 @@ body {
 
 .nav {
     margin-left: 200px;
+}
+
+.add{
+    margin-top: 100px;
+}
+
+.addcard:hover{
+    border-style:solid;
+}
+
+.addcard{
+        padding: 50px;
+        margin-top: 20px;
+        border-radius: 10px;
+        border: dashed 6px;
+        border-color: black;
+        background-color: #8baec9;
+        text-align: center
 }
 </style>
 
