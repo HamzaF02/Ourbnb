@@ -9,9 +9,14 @@ namespace Ourbnb.Controllers
     public class RentalController : Controller
     {
         private readonly IRepository<Rental> _repository;
-        public RentalController(IRepository<Rental> rentalRepository)
+        private readonly IRepository<Customer> _Crepository;
+        private readonly ILogger<RentalController> _logger;
+
+        public RentalController(IRepository<Rental> rentalRepository, IRepository<Customer> Crepository, ILogger<RentalController> logger)
         {
             _repository = rentalRepository;
+            _Crepository = Crepository;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Table()
@@ -47,15 +52,38 @@ namespace Ourbnb.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Rental rental)
         {
-            if (ModelState.IsValid)
-            {
-                bool OK = await _repository.Create(rental);
-                if (OK)
+            try { 
+                Customer owner = await _Crepository.getObjectById(rental.OwnerId);
+                if(owner == null)
                 {
-                    return RedirectToAction(nameof(Grid));
+                    return BadRequest("Owner not Found");
                 }
+
+                Rental newRental = new Rental
+                {
+                    Name = rental.Name,
+                    Description = rental.Description,
+                    FromDate = rental.FromDate,
+                    ToDate = rental.ToDate,
+                    Owner = owner,
+                    OwnerId = rental.OwnerId,
+                    Price = rental.Price,
+                    Bilder = rental.Bilder,
+                    Location = rental.Location,
+                    Rating = 0
+                };
+
+                bool ok = await _repository.Create(newRental);
+                if(!ok) {
+                    return View(rental);
+                }
+                return RedirectToAction(nameof(Grid));
+            }catch (Exception ex)
+            {
+                return View(rental);
             }
-            return View(rental);
+            
+           
         }
     }
 }

@@ -11,14 +11,18 @@ using Ourbnb.DAL;
 namespace Ourbnb.Migrations
 {
     [DbContext(typeof(RentalDbContext))]
-    [Migration("20231016143038_RentalDb")]
-    partial class RentalDb
+    [Migration("20231019174307_InitDb")]
+    partial class InitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true);
 
             modelBuilder.Entity("Ourbnb.Models.Customer", b =>
                 {
@@ -39,6 +43,10 @@ namespace Ourbnb.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -114,7 +122,7 @@ namespace Ourbnb.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Rating")
+                    b.Property<double?>("Rating")
                         .HasColumnType("REAL");
 
                     b.Property<DateOnly>("ToDate")
