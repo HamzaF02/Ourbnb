@@ -3,6 +3,9 @@ using Ourbnb.DAL;
 using Ourbnb.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using MyShop.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using NuGet.Configuration;
 
 namespace Ourbnb.Controllers
 {
@@ -45,15 +48,27 @@ namespace Ourbnb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var owners = await _Crepository.GetAll();
+            var CreateRental = new CreateRental
+            {
+                OwnersList = owners.Select(owner => new SelectListItem
+                {
+
+                    Value = owner.CustomerId.ToString(),
+                    Text = owner.CustomerId.ToString() + " : " + owner.FirstName+" "+owner.LastName
+                }).ToList(),
+
+                Rental = new Rental()
+            };
+            return View(CreateRental);
         }
         [HttpPost]
         public async Task<IActionResult> Create(Rental rental)
         {
             try { 
-                Customer owner = await _Crepository.getObjectById(rental.OwnerId);
+                var owner = await _Crepository.getObjectById(rental.OwnerId);
                 if(owner == null)
                 {
                     return BadRequest("Owner not Found");
