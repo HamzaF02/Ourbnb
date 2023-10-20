@@ -88,17 +88,19 @@ namespace Ourbnb.Controllers
                     Rating = 0
                 };
 
+
                 bool ok = await _repository.Create(newRental);
                 if(!ok) {
-                    return View(rental);
+
+                    return await Create();
                 }
                 return RedirectToAction(nameof(Grid));
             }catch (Exception ex)
             {
                 return View(rental);
             }
-            
-           
         }
+
+
     }
 }
