@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Ourbnb.Models.Order>
+
+
+<h1>List of Orders</h1>
+
+
+
+<div class="container">
+    <table class='table table-striped' style="margin-top:30px;">
+        <thead class="thead-dark">
+            <tr><th>CustomerId</th><th>From</th><th>To</th><th>Rating</th><th>CustomerId</th><th>Customer</th><th>RentalId</th><th>Rental</th><th>TotalPrice</th></tr>
+        </thead>
+            @foreach (var item in Model)
+            {
+                if (item != null)
+                {
+
+                    <tr>
+                        <td>@item.CustomerId</td>
+                        <td>@item.From</td>
+                        <td>@item.To</td>
+                        <td>@item.Rating</td>
+                        <td>@item.CustomerId</td>
+                        <td>@item.Customer.FirstName @item.Customer.LastName</td>
+                        <td>@item.RentalId</td>
+                        <td>@item.Rental.Name</td>
+                        <td>@item.TotalPrice</td>
+                        <td></td>
+                    </tr>
+                }
+            }
+    </table>
+</div>
+
+<button class="btn btn-outline-info info" style="margin-top:30px;">
+    <a class="link-dark" style="text-decoration:none;" asp-controller="Home" asp-action="Index">Go back Home</a>
+</button>

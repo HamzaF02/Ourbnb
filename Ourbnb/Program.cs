@@ -17,6 +17,8 @@ builder.Services.AddDbContext<RentalDbContext>(options =>
 });
 builder.Services.AddScoped<IRepository<Rental>, RentalRepository>();
 builder.Services.AddScoped<IRepository<Customer>, CustomerRepository>();
+builder.Services.AddScoped<IRepository<Order>, OrderRepository>();
+
 
 var loggerConfig = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File
     ($"Logs/app_{DateTime.Now:yyyyMMdd_HHmmss}.log");
