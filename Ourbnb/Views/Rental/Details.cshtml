@@ -28,7 +28,7 @@
 <div class="row gx-5">
     <img style="" alt="@Model.Name" src="@Model.Bilder" class="img-fluid col-5" />
     <div class="col-7">
-       
+
         <h3 class="pull-right">Location: @Model.Location</h3>
         <h5 class="pull-right">Owner:@Model.Owner.FirstName @Model.Owner.LastName</h5>
         <h5>@Model.Description</h5>
@@ -37,6 +37,9 @@
 
         <button class="btn btn-outline-success info">
             <a href="/Rental/Grid">Rent out</a>
+        </button>
+        <button class="btn btn-outline-primary info">
+            <a>Update Rental</a>
         </button>
         <button class="btn btn-outline-info info">
             <a href="/Rental/Table">Back to Table View</a>
