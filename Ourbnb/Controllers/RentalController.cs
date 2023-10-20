@@ -15,6 +15,25 @@ namespace Ourbnb.Controllers
         private readonly IRepository<Customer> _Crepository;
         private readonly ILogger<RentalController> _logger;
 
+        public async Task<CreateRental> ViewModel()
+        {
+            var owners = await _Crepository.GetAll();
+            var CreateRental = new CreateRental
+            {
+
+                OwnersList = owners.Select(owner => new SelectListItem
+                {
+
+                    Value = owner.CustomerId.ToString(),
+                    Text = owner.CustomerId.ToString() + " : " + owner.FirstName + " " + owner.LastName
+                }).ToList(),
+
+                Rental = new Rental()
+            };
+
+            return CreateRental;
+        }
+
         public RentalController(IRepository<Rental> rentalRepository, IRepository<Customer> Crepository, ILogger<RentalController> logger)
         {
             _repository = rentalRepository;
@@ -47,26 +66,19 @@ namespace Ourbnb.Controllers
             return View(rental);
         }
 
+
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var owners = await _Crepository.GetAll();
-            var CreateRental = new CreateRental
-            {
-                OwnersList = owners.Select(owner => new SelectListItem
-                {
-
-                    Value = owner.CustomerId.ToString(),
-                    Text = owner.CustomerId.ToString() + " : " + owner.FirstName+" "+owner.LastName
-                }).ToList(),
-
-                Rental = new Rental()
-            };
+            var CreateRental = await ViewModel();
             return View(CreateRental);
         }
         [HttpPost]
         public async Task<IActionResult> Create(Rental rental)
         {
+            var CreateRental = await ViewModel();
+            CreateRental.Rental = rental;
             try { 
                 var owner = await _Crepository.getObjectById(rental.OwnerId);
                 if(owner == null)
@@ -90,15 +102,49 @@ namespace Ourbnb.Controllers
 
                 bool ok = await _repository.Create(newRental);
                 if(!ok) {
-                    return View(rental);
+                    
+                    return View(CreateRental);
                 }
                 return RedirectToAction(nameof(Grid));
             }catch (Exception ex)
             {
-                return View(rental);
+                return View(CreateRental);
             }
-            
-           
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var rental = await _repository.getObjectById(id);
+            if (rental == null)
+            {
+                return NotFound("Nothing here");
+            }
+            var CreateRental = await ViewModel();
+            CreateRental.Rental = rental;
+
+            return View(CreateRental);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(Rental rental)
+        {
+            var CreateRental = await ViewModel();
+            CreateRental.Rental = rental;
+            try
+            {
+                bool ok = await _repository.Update(rental);
+                if (!ok)
+                {
+                    return View(CreateRental);
+                }
+                return RedirectToAction(nameof(Grid));
+            }
+            catch (Exception ex)
+            {
+                return View(CreateRental);
+            }
         }
     }
 }
+            

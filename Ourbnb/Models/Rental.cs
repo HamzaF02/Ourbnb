@@ -6,7 +6,7 @@ namespace Ourbnb.Models
     {
         public int RentalId { get; set; }
 
-        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ]{1,30}", ErrorMessage = "Name must be letters or numbers between 1 to 30 charachters")]
+        //[RegularExpression(@"[0-9a-zA-ZæøåÆØÅ]{1,30}", ErrorMessage = "Name must be letters or numbers between 1 to 30 charachters")]
         public string Name { get; set; } = string.Empty;
         [StringLength(200)]
         public string Description { get; set; } = string.Empty;
