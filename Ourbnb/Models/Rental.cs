@@ -18,7 +18,7 @@ namespace Ourbnb.Models
         public string Location { get; set; } = string.Empty;
         [Range(0.01, int.MaxValue, ErrorMessage = "Price must be greater than 0 ")]
         public int Price { get; set; }
-        public string Bilder { get; set; } = string.Empty;
+        public string? Bilder { get; set; }
         public int OwnerId { get; set; }
         public virtual Customer Owner { get; set; } = default!;
         public virtual List<Order>? Orders { get; set; }
