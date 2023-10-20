@@ -1,0 +1,51 @@
+﻿@model CreateRental
+
+<h2>Update Rental</h2>
+
+<form asp-action="Update">
+    <input type="hidden" asp-for="Rental.RentalId" />
+    <div class="form-group">
+        <label asp-for="Rental.Name"></label><span class="text-danger">*</span>
+        <input asp-for="Rental.Name" class="form-control" />
+        <span asp-validation-for="Rental.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rental.Location"></label>
+        <input asp-for="Rental.Location" class="form-control" />
+        <span asp-validation-for="Rental.Location" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rental.OwnerId"></label>
+        <select asp-for="Rental.OwnerId" asp-items="Model.OwnersList" class="form-control">
+            <option value="">Select an Owner...</option>
+        </select>
+        <span asp-validation-for="Rental.OwnerId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rental.Price"></label><span class="text-danger">*</span>
+        <input asp-for="Rental.Price" class="form-control" />
+        <span asp-validation-for="Rental.Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rental.FromDate"></label>
+        <input asp-for="Rental.FromDate" class="form-control" type="date" />
+        <span asp-validation-for="Rental.FromDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rental.ToDate"></label>
+        <input asp-for="Rental.ToDate" class="form-control" type="date" />
+        <span asp-validation-for="Rental.ToDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rental.Description"></label>
+        <input asp-for="Rental.Description" class="form-control" />
+        <span asp-validation-for="Rental.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rental.Bilder"></label>
+        <input asp-for="Rental.Bilder" class="form-control" />
+        <span asp-validation-for="Rental.Bilder" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Grid" class="btn btn-secondary">Back to Rentals</a>
+</form>
