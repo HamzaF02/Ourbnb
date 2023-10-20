@@ -100,10 +100,16 @@ namespace Ourbnb.Controllers
                     Rating = 0
                 };
 
+
                 bool ok = await _repository.Create(newRental);
                 if(!ok) {
+<<<<<<< HEAD
                     
                     return View(CreateRental);
+=======
+
+                    return await Create();
+>>>>>>> e0a2ab1cde42a84c6b107bb51e9cc7d3eeb770d9
                 }
                 return RedirectToAction(nameof(Grid));
             }catch (Exception ex)
@@ -145,6 +151,8 @@ namespace Ourbnb.Controllers
                 return View(CreateRental);
             }
         }
+
+
     }
 }
             
