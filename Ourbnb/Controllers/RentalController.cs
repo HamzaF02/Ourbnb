@@ -83,7 +83,7 @@ namespace Ourbnb.Controllers
                 var owner = await _Crepository.getObjectById(rental.OwnerId);
                 if(owner == null)
                 {
-                    return BadRequest("Owner not Found");
+                    return View(CreateRental);
                 }
 
                 Rental newRental = new Rental
@@ -102,14 +102,8 @@ namespace Ourbnb.Controllers
 
 
                 bool ok = await _repository.Create(newRental);
-                if(!ok) {
-<<<<<<< HEAD
-                    
+                if(!ok) {        
                     return View(CreateRental);
-=======
-
-                    return await Create();
->>>>>>> e0a2ab1cde42a84c6b107bb51e9cc7d3eeb770d9
                 }
                 return RedirectToAction(nameof(Grid));
             }catch (Exception ex)

@@ -52,7 +52,6 @@ namespace Ourbnb.DAL
             try
             {
                 _db.Rentals.Update(rental);
-                _db.Rentals.Add(rental);
                 await _db.SaveChangesAsync();
                 return true;
             }
