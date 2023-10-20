@@ -43,6 +43,9 @@ namespace Ourbnb.Controllers
 
         public async Task<IActionResult> Table()
         {
+            _logger.LogInformation("This is an error message");
+            _logger.LogWarning("This is a warning");
+            _logger.LogError("Error!!!!");
             var rentals =  await _repository.GetAll();
             ViewBag.CurrentViewName = "Table";
             return View(rentals);
