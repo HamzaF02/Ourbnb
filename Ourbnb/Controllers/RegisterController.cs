@@ -40,38 +40,46 @@ namespace Ourbnb.Controllers
             return View(createCustomer);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Customer customer)
+        public async Task<IActionResult> regPage(Customer customer)
         {
 
             var CreateCustomer = await ViewModel();
             CreateCustomer.customer = customer;
 
-            try
+            if (ModelState.IsValid)
             {
-
-                Customer newCustomer = new Customer
+                try
                 {
-                    FirstName = customer.FirstName,
-                    LastName = customer.LastName,
-                    Address = customer.Address,
-                    Phone= customer.Phone,
-                    Email = customer.Email
-                    
-                };
+
+                    Customer newCustomer = new Customer
+                    {
+                        FirstName = customer.FirstName,
+                        LastName = customer.LastName,
+                        Address = customer.Address,
+                        Phone = customer.Phone,
+                        Email = customer.Email
+
+                    };
 
 
-                bool ok = await _repository.Create(newCustomer);
-                if (!ok)
+                    bool ok = await _repository.Create(newCustomer);
+                    if (!ok)
+                    {
+                        return View(CreateCustomer);
+                    }
+                    return RedirectToAction(nameof(regPage));
+                }
+                catch (Exception ex)
                 {
                     return View(CreateCustomer);
                 }
-                return RedirectToAction(nameof(regPage));
-            }catch (Exception ex)
+            }
+            else
             {
                 return View(CreateCustomer);
             }
         }
-           
-        }
 
     }
+
+}
