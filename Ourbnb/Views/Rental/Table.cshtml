@@ -1,30 +1,56 @@
 ﻿@model IEnumerable<Ourbnb.Models.Rental>
 
-<link rel="stylesheet" href="/css/site.css">
+    <style>
+    body {
+        background-color: #8baec9;
+    }
 
-<h1>List of Rentals (@ViewBag.CurrentViewName View)</h1>
+    </style>
+
+
+<h1>Table of Rentals</h1>
 
 <button class="btn btn-light">
-    <a href="/Rental/Grid">Grid View</a>
+    <a class="link-dark" asp-controller="Rental" asp-action="Grid" style="text-decoration:none">Grid View</a>
  </button>
 
-    <div class="container">
-        <table class='table table-striped'>
-            <tr><th>Rentalid</th><th>Name</th><th>Desription</th><th>Fromdate</th><th>Todate</th><th>Rating</th><th>Location</th><th>Price</th><th>Owner</th></tr>
+
+<div style="overflow-x:auto;  ">
+    <table class="table table-striped table-dark " style="margin-top:30px; width: 100%; border-collapse: collapse; ">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Location</th>
+                <th scope="col">Price</th>
+                <th scope="col">Owner</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.RentalId</td>
-                    <td>@item.Name</td>
-                    <td>@item.Description</td>
-                    <td>@item.FromDate</td>
-                    <td>@item.ToDate</td>
-                    <td>@item.Rating</td>
-                    <td>@item.Location</td>
-                    <td>@item.Price.ToString("0.00 NOK")</td>
-                    <td>@item.Owner.FirstName  @item.Owner.LastName</td>
-                    <td></td>
-                </tr>
+                if (item != null)
+                {
+
+                    <tr>
+                        <td>@item.RentalId</td>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>@item.FromDate</td>
+                        <td>@item.ToDate</td>
+                        <td>@item.Rating</td>
+                        <td>@item.Location</td>
+                        <td>@item.Price.ToString("0.00 NOK")</td>
+                        <td>@item.Owner.FirstName  @item.Owner.LastName</td>
+                        <td></td>
+                    </tr>
+                }
             }
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>

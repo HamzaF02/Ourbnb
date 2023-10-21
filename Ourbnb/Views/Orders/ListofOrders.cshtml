@@ -1,36 +1,50 @@
 ﻿@model IEnumerable<Ourbnb.Models.Order>
 
+    <style>
+    
+
+
+    </style>
+
 
 <h1>List of Orders</h1>
 
-
-
-<div class="container">
-    <table class='table table-striped' style="margin-top:30px;">
-        <thead class="thead-dark">
-            <tr><th>CustomerId</th><th>From</th><th>To</th><th>Rating</th><th>CustomerId</th><th>Customer</th><th>RentalId</th><th>Rental</th><th>TotalPrice</th></tr>
-        </thead>
-            @foreach (var item in Model)
+<div  style="overflow-x:auto;  ">
+    <table class="table table-striped table-dark " style="margin-top:30px; width: 100%; border-collapse: collapse; ">
+    <thead>
+        <tr>
+            <th scope="col">Order #</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Rental</th>
+            <th scope="col">Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item != null)
             {
-                if (item != null)
-                {
 
-                    <tr>
-                        <td>@item.CustomerId</td>
-                        <td>@item.From</td>
-                        <td>@item.To</td>
-                        <td>@item.Rating</td>
-                        <td>@item.CustomerId</td>
-                        <td>@item.Customer.FirstName @item.Customer.LastName</td>
-                        <td>@item.RentalId</td>
-                        <td>@item.Rental.Name</td>
-                        <td>@item.TotalPrice</td>
-                        <td></td>
-                    </tr>
-                }
+                <tr>
+                   
+                    <td>@item.OrderId</td>
+                    <td>@item.From</td>
+                    <td>@item.To</td>
+                    <td>@item.Rating</td>
+                    <td>@item.Customer.FirstName @item.Customer.LastName</td>
+                    <td>@item.Rental.Name</td>
+                    <td>@item.TotalPrice</td>
+                  
+                </tr>
             }
-    </table>
+        }
+    </tbody>
+</table>
 </div>
+
 
 <button class="btn btn-outline-info info" style="margin-top:30px;">
     <a class="link-dark" style="text-decoration:none;" asp-controller="Home" asp-action="Index">Go back Home</a>

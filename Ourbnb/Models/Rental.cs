@@ -14,7 +14,7 @@ namespace Ourbnb.Models
         public DateOnly ToDate { get; set; }
         [Range(0.01, 5, ErrorMessage ="Rating must be greater than 0 and 5 or less")]
         public double? Rating { get; set; } = default!;
-        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ]{2,50}", ErrorMessage = "Name must be letters or numbers between 2 to 50 charachters")]
+        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ ]{2,50}", ErrorMessage = "Name must be letters or numbers between 2 to 50 charachters")]
         public string Location { get; set; } = string.Empty;
         [Range(0.01, int.MaxValue, ErrorMessage = "Price must be greater than 0")]
         public int Price { get; set; }
