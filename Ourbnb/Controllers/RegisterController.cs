@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using NuGet.Protocol.Core.Types;
 using Ourbnb.DAL;
 using Ourbnb.Models;
+using Ourbnb.ViewModels;
 using System.Diagnostics;
 
 namespace Ourbnb.Controllers
@@ -17,16 +20,34 @@ namespace Ourbnb.Controllers
             _repository = customer;
         }
 
+        public async Task<CreateCustomer> ViewModel()
+        {
+            var owners = await _repository.GetAll();
+            var CreateCustomer = new CreateCustomer
+            {
+
+
+                customer = new Customer()
+            };
+
+            return CreateCustomer;
+        }
+
         [HttpGet]
         public async Task<IActionResult> regPage()
         {
-           
-            return View();
+            var createCustomer = await ViewModel();
+            return View(createCustomer);
         }
         [HttpPost]
         public async Task<IActionResult> Create(Customer customer)
         {
-       
+
+            var CreateCustomer = await ViewModel();
+            CreateCustomer.customer = customer;
+
+            try
+            {
 
                 Customer newCustomer = new Customer
                 {
@@ -35,7 +56,6 @@ namespace Ourbnb.Controllers
                     Address = customer.Address,
                     Phone= customer.Phone,
                     Email = customer.Email
-
                     
                 };
 
@@ -43,13 +63,15 @@ namespace Ourbnb.Controllers
                 bool ok = await _repository.Create(newCustomer);
                 if (!ok)
                 {
-                    return View();
+                    return View(CreateCustomer);
                 }
-                return RedirectToAction();
+                return RedirectToAction(nameof(regPage));
+            }catch (Exception ex)
+            {
+                return View(CreateCustomer);
             }
+        }
            
         }
 
     }
-
-}
