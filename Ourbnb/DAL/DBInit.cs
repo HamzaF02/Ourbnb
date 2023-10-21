@@ -24,8 +24,8 @@ namespace Ourbnb.DAL
                         LastName="Ylli",
                         Address="Pilestreden 32",
                         Phone=91824521,
-                        Email="Hamza@gmail.com",
-                        Password = "hey"
+                        Email="Hamza@gmail.com"
+                       
                        
                     },
 
@@ -35,8 +35,8 @@ namespace Ourbnb.DAL
                         LastName="Yusuf",
                         Address="Pilestredet 35",
                         Phone=47782356,
-                        Email="Mahdi123@gmail.com",
-                        Password = "hey12"
+                        Email="Mahdi123@gmail.com"
+                     
 
                     }
                 
