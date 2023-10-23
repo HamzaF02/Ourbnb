@@ -102,8 +102,8 @@ namespace Ourbnb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [DataType(DataType.PhoneNumber)]
-            [Display(Name = "Phonenumber")]
+            [RegularExpression(@"[0-9]{8}", ErrorMessage = "Phonenumber must be 8 numbers")]
+            [Display(Name = "Phone")]
             public int Phone { get; set; }
 
             /// <summary>

@@ -6,6 +6,16 @@
 
 <h1>@ViewData["Title"]</h1>
 
+<style>
+    .form-floating{
+        margin-top:20px;
+    }
+
+    #registerSubmit{
+        margin-top:20px;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -30,7 +40,7 @@
             <div class="form-floating">
                 <input asp-for="Input.Phone" class="form-control"  aria-required="true" />
                 <label asp-for="Input.Phone"></label>
-                <span asp-validation-for="Input.Address" class="text-danger"></span>
+                <span asp-validation-for="Input.Phone" class="text-danger"></span>
             </div>
             <div class="form-floating">
                 <input asp-for="Input.Email" class="form-control"  aria-required="true" />
