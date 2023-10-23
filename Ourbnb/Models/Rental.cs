@@ -22,6 +22,18 @@ namespace Ourbnb.Models
         public int OwnerId { get; set; }
         public virtual Customer Owner { get; set; } = default!;
         public virtual List<Order>? Orders { get; set; }
-        
+
+        internal void UpdateRating()
+        {
+            double rating = 0;
+            foreach (var o in Orders)
+            {
+                if (o.Rating != null)
+                {
+                    rating += (int)o.Rating;
+                }
+            }
+            Rating = rating / Orders.Count;
+        }
     }
 }
