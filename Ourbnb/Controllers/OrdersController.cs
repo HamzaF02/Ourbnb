@@ -103,6 +103,8 @@ namespace Ourbnb.Controllers
                 {
                     return View(CreateOrder);
                 }
+                rental.UpdateRating();
+                await _Rrepository.Update(rental);
                 return RedirectToAction(nameof(ListofOrders));
             }
             catch (Exception ex)
