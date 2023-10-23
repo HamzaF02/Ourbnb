@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Ourbnb.DAL;
 using Ourbnb.Models;
-using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Ourbnb.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using NuGet.Configuration;
 
 namespace Ourbnb.Controllers
 {
@@ -16,6 +20,8 @@ namespace Ourbnb.Controllers
             _repository = repository;
         }
 
+        [HttpGet]
+        [Authorize]
         public async Task<IActionResult> ListofOrders()
         {
             var orders = await _repository.GetAll();

@@ -75,6 +75,42 @@ namespace Ourbnb.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
+            [StringLength(20, ErrorMessage = "Firstname must be between 2 to 20 characters long.", MinimumLength = 2)]
+            [Display(Name = "Firstname")]
+            public string Firstname { get; set; }
+
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
+            [Required]
+            [StringLength(20, ErrorMessage = "Lastname must be between 2 to 20 characters long.", MinimumLength = 2)]
+            [Display(Name = "Lastname")]
+            public string Lastname { get; set; }
+
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
+            [Required]
+            [StringLength(50, ErrorMessage = "Adress must be between 2 to 50 characters long.", MinimumLength = 2)]
+            [Display(Name = "Adress")]
+            public string Address { get; set; }
+
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
+            [Required]
+            [DataType(DataType.PhoneNumber)]
+            [Display(Name = "Phonenumber")]
+            public int Phone { get; set; }
+
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }

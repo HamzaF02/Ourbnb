@@ -72,13 +72,14 @@ namespace Ourbnb.Controllers
 
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             var CreateRental = await ViewModel();
             return View(CreateRental);
         }
         [HttpPost]
-        [Authorize]
+     
         public async Task<IActionResult> Create(Rental rental)
         {
             var CreateRental = await ViewModel();
@@ -117,6 +118,7 @@ namespace Ourbnb.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Update(int id)
         {
             var rental = await _repository.getObjectById(id);

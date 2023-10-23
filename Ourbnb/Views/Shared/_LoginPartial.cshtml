@@ -7,11 +7,11 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style=" margin-top:5px; margin-left:10px; margin-right:10px;">Hello @UserManager.GetUserName(User)!</a>
     </li>
-    <li class="nav-item">
+        <li class="nav-item" style=" margin-top:5px;">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                <button id="logout" type="submit" class="btn btn-primary align-items-end" style="margin-right:10px;">Logout</button>
         </form>
     </li>
 }
@@ -20,10 +20,9 @@ else
   
 
         <li class="nav-item" style="margin-top:5px; margin-left:10px; margin-right:10px; border-radius: 30px;font-weight:1000;">
-
-            <a asp-area="" asp-controller="Register " asp-action="regPage" id="register" asp-area="Identity" asp-page="/Account/Register">
-                <button class="btn btn-outline-dark align-items-end" style="height: 3rem;">Register</button>
-            </a>
+            <form style="display: inline">
+                <button class="btn btn-outline-dark align-items-end" id="register" asp-area="Identity" asp-page="/Account/Register" style="height: 3rem;">Register</button>
+            </form>
         </li>
 
         <li class="nav-item" style=" margin-top:5px; margin-left:10px; margin-right:10px; font-weight:1000;">
