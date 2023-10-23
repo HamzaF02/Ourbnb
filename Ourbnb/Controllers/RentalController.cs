@@ -78,6 +78,7 @@ namespace Ourbnb.Controllers
             return View(CreateRental);
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(Rental rental)
         {
             var CreateRental = await ViewModel();

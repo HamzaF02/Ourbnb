@@ -3,8 +3,10 @@ using Ourbnb.DAL;
 using Ourbnb.Models;
 using Serilog;
 using Serilog.Events;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("RentalDbContextConnection") ?? throw new InvalidOperationException("Connection string 'RentalDbContextConnection' not found.");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -15,10 +17,16 @@ builder.Services.AddDbContext<RentalDbContext>(options =>
         builder.Configuration["ConnectionStrings:RentalDbContextConnection"]);
 
 });
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<RentalDbContext>();
 builder.Services.AddScoped<IRepository<Rental>, RentalRepository>();
 builder.Services.AddScoped<IRepository<Customer>, CustomerRepository>();
 builder.Services.AddScoped<IRepository<Order>, OrderRepository>();
 
+
+builder.Services.AddRazorPages(); // order of adding services does not matter
+builder.Services.AddSession();
 
 var loggerConfig = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File
     ($"Logs/app_{DateTime.Now:yyyyMMdd_HHmmss}.log");
@@ -44,6 +52,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
+app.UseSession();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
