@@ -153,30 +153,6 @@ namespace Ourbnb.Controllers
         }
 
 
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var rental = await _repository.getObjectById(id);
-            if (rental == null)
-            {
-               
-                return BadRequest("Something went wrong, return to home page");
-            }
-            return View(rental);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            bool OK = await _repository.Delete(id);
-            if (OK) {return RedirectToAction(nameof(Grid));}
-
-
-            return BadRequest("Rental deletion failed, return to homepage");
-        }
-
     }
 }
             
