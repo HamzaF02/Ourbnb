@@ -19,38 +19,46 @@
         text-decoration:none;
     }
 
+    body{
+        background-color: #8baec9;
+    }
+
 </style>
 
-<h2 class="my-5">
+<h2 class="my-3">
     @Model.Name
 </h2>
+<div>
+    <div class="row row-cols-1 row-cols-lg-2  row-cols-md-1 row-cols-sm-1">
+        <div style="margin-top:10px;">
+            <img style="border-radius:10px; border-color:white; border-style:solid; padding:0px;" alt="@Model.Name" src="@Model.Bilder" class="img-fluid" />
+        </div>
+        <div style="background-color:white; padding:25px; margin-top:10px; border-radius:10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
 
-<div class="row gx-5">
-    <img style="" alt="@Model.Name" src="@Model.Bilder" class="img-fluid col-5" />
-    <div class="col-7">
+            <h3 class="pull-right">Location: @Model.Location</h3>
+            <h5 class="pull-right">Owner:@Model.Owner.FirstName @Model.Owner.LastName</h5>
+            <h5>@Model.Description</h5>
+            <h5 class="pull-right">Price per/n: @Model.Price.ToString("0.00 NOK")</h5>
+            <h5 class="pull-right">Rating: @Model.Rating</h5>
+            <div style="margin-top:30px;">
+                <button class="btn btn-outline-success info" style="margin:0px;">
+                    <a href="/Rental/Grid">Rent out</a>
+                </button>
+                <button class="btn btn-outline-primary info" style="margin:0px;">
+                    <a asp-controller="Rental" asp-action="Update" asp-route-id="@Model.RentalId">Update Rental</a>
+                </button>
+                <button class="btn btn-outline-danger info" style="margin:0px;">
+                    <a asp-controller="Rental" asp-action="Delete" asp-route-id="@Model.RentalId">Delete</a>
+                </button>
+                <button class="btn btn-outline-info info" style="margin:0px;">
+                    <a href="/Rental/Table">Back to Table View</a>
+                </button>
 
-        <h3 class="pull-right">Location: @Model.Location</h3>
-        <h5 class="pull-right">Owner:@Model.Owner.FirstName @Model.Owner.LastName</h5>
-        <h5>@Model.Description</h5>
-        <h5 class="pull-right">Price per/n: @Model.Price.ToString("0.00 NOK")</h5>
-        <h5 class="pull-right">Rating: @Model.Rating</h5>
+                <button class="btn btn-outline-info info" style="margin:0px;">
+                    <a href="/Rental/Grid">Back to Grid View</a>
+                </button>
+            </div>
 
-        <button class="btn btn-outline-success info">
-            <a href="/Rental/Grid">Rent out</a>
-        </button>
-        <button class="btn btn-outline-primary info">
-            <a asp-controller="Rental" asp-action="Update" asp-route-id="@Model.RentalId">Update Rental</a>
-        </button>
-        <button class="btn btn-outline-danger info">
-            <a asp-controller="Rental" asp-action="Delete" asp-route-id="@Model.RentalId">Delete</a>
-        </button>
-        <button class="btn btn-outline-info info">
-            <a href="/Rental/Table">Back to Table View</a>
-        </button>
-
-        <button class="btn btn-outline-info info">
-            <a href="/Rental/Grid">Back to Grid View</a>
-        </button>
-
+        </div>
     </div>
 </div>
