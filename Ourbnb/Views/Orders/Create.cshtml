@@ -1,0 +1,41 @@
+﻿@model CreateOrder
+
+<h2>Create New Order</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Order.RentalId"></label>
+        <select asp-for="Order.RentalId" asp-items="Model.RentalList" class="form-control">
+            <option value="">Choose an Rental</option>
+        </select>
+        <span asp-validation-for="Order.RentalId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Order.CustomerId"></label>
+        <select asp-for="Order.CustomerId" asp-items="Model.CustomerList" class="form-control">
+            <option value="">Choose an Customer</option>
+        </select>
+        <span asp-validation-for="Order.CustomerId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Order.From"></label>
+        <input asp-for="Order.From" class="form-control" type="date" />
+        <span asp-validation-for="Order.From" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Order.To"></label>
+        <input asp-for="Order.To" class="form-control" type="date" />
+        <span asp-validation-for="Order.To" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+    
+    <div class="form-group">
+        <label asp-for="Order.Rating"></label>
+        <input asp-for="Order.Rating" class="form-control" />
+        <span asp-validation-for="Order.Rating" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-controller="Rental" asp-action="Grid" class="btn btn-secondary">Back to Retnals</a>
+</form>

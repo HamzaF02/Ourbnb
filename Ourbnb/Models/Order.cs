@@ -3,8 +3,8 @@
     public class Order
     {
         public int OrderId { get; set; }
-        public DateOnly From { get; set; }
-        public DateOnly To { get; set; }
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
         public int? Rating { get; set; }
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; } = default!;
