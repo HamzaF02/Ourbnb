@@ -83,6 +83,8 @@ namespace Ourbnb.Controllers
                 {
                     return View(CreateOrder);
                 }
+                var Days = order.To - order.From;
+                var total = Days.Days * rental.Price;
 
                 Order newOrder = new Order
                 {
@@ -92,7 +94,7 @@ namespace Ourbnb.Controllers
                     RentalId = order.RentalId,
                     From = order.From,
                     To = order.To,
-                    TotalPrice = 0,
+                    TotalPrice = total,
                     Rating = order.Rating,
                 };
 
