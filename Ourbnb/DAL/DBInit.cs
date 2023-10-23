@@ -60,7 +60,7 @@ namespace Ourbnb.DAL
                         FromDate=new DateTime(2023, 10, 21),
                         ToDate=new DateTime(2023, 10, 30),
                         Bilder = "https://hellvikhytte.no/content/uploads/sites/14/2021/08/Fjellerke-3-scaled.jpg",
-                        Rating=4.5,
+                        Rating=3,
                     },
                     new Rental
                     {
@@ -113,6 +113,7 @@ namespace Ourbnb.DAL
                         RentalId = 1,
                         From = new DateTime(2023, 10, 30),
                         To = new DateTime(2023, 10, 21),
+                        Rating = 3
                     }
                 };
                 context.AddRange(orders);

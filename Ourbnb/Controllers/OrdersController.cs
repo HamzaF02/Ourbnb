@@ -25,10 +25,11 @@ namespace Ourbnb.Controllers
             _Crepository = crepository;
             _Rrepository = Rrepository;
         }
-        public async Task<CreateOrder> ViewModel()
+        public async Task<CreateOrder?> ViewModel(int id)
         {
             var customers = await _Crepository.GetAll();
-            var rentals = await _Rrepository.GetAll();
+            var rental = await _Rrepository.getObjectById(id);
+            if (rental == null) { return null; }
 
 
             var CreateOrder = new CreateOrder
@@ -42,11 +43,7 @@ namespace Ourbnb.Controllers
                 }).ToList(),
 
                 Order = new Order(),
-                RentalList = rentals.Select(rental => new SelectListItem
-                {
-                    Value = rental.RentalId.ToString(),
-                    Text = rental.RentalId.ToString() + " : " + rental.Name
-                }).ToList(),
+                Rental = rental
             };
 
             return CreateOrder;
@@ -63,16 +60,17 @@ namespace Ourbnb.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int id)
         {
-            var CreateOrder = await ViewModel();
+            var CreateOrder = await ViewModel(id);
             return View(CreateOrder);
         }
         [HttpPost]
 
         public async Task<IActionResult> Create(Order order)
         {
-            var CreateOrder = await ViewModel();
+            var CreateOrder = await ViewModel(order.RentalId);
+            if(CreateOrder == null) { return BadRequest("Something went wrong, return home"); }
             CreateOrder.Order = order;
             try
             {
