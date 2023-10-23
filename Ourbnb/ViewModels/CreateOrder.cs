@@ -9,6 +9,6 @@ namespace Ourbnb.ViewModels
     {
         public Order Order { get; set; } = default!;
         public List<SelectListItem> CustomerList { get; set; } = default!;
-        public List<SelectListItem> RentalList { get; set; } = default!;
+        public Rental Rental { get; set; } = default!;
     }
 }
