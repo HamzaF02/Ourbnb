@@ -10,8 +10,8 @@ namespace Ourbnb.Models
         public string Name { get; set; } = string.Empty;
         [StringLength(200)]
         public string Description { get; set; } = string.Empty;
-        public DateOnly FromDate { get; set; }
-        public DateOnly ToDate { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
         [Range(0.01, 5, ErrorMessage ="Rating must be greater than 0 and 5 or less")]
         public double? Rating { get; set; } = default!;
         [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ ]{2,50}", ErrorMessage = "Name must be letters or numbers between 2 to 50 charachters")]
