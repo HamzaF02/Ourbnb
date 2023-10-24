@@ -1,9 +1,15 @@
-﻿namespace Ourbnb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Ourbnb.Models
 {
     public class Order
     {
         public int OrderId { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime From { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime To { get; set; }
         public int? Rating { get; set; }
         public int CustomerId { get; set; }
