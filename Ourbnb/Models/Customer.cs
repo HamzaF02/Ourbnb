@@ -6,6 +6,7 @@ namespace Ourbnb.Models
 
     public class Customer
     {
+        
         public int CustomerId { get; set; }
 
         [RegularExpression(@"[a-zA-ZæøåÆØÅ]{1,20}", ErrorMessage = "First Name must be letters between 1 to 20 characters")]
@@ -23,7 +24,7 @@ namespace Ourbnb.Models
         [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{1,50}", ErrorMessage = "Email must be letters and numbers between 1 to 50 characters")]
         public string Email { get; set; } = string.Empty;
 
-        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{1,50}", ErrorMessage = "Password must be letters and numbers between 1 to 50 characters")]
+        public string IdentityId { get; set; }
 
         public virtual List<Order>? Orders { get; set; }
     }
