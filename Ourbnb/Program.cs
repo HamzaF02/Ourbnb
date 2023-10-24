@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Ourbnb.DAL;
 using Ourbnb.Models;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,18 @@ builder.Services.AddDbContext<RentalDbContext>(options =>
 
 });
 builder.Services.AddScoped<IRepository<Rental>, RentalRepository>();
+builder.Services.AddScoped<IRepository<Customer>, CustomerRepository>();
+builder.Services.AddScoped<IRepository<Order>, OrderRepository>();
+
+
+var loggerConfig = new LoggerConfiguration().MinimumLevel.Information().WriteTo.File
+    ($"Logs/app_{DateTime.Now:yyyyMMdd_HHmmss}.log");
+loggerConfig.Filter.ByExcluding(e => e.Properties.TryGetValue("SourceContext", out var value) &&
+    e.Level == LogEventLevel.Information &&
+    e.MessageTemplate.Text.Contains("Executed DbCommand"));
+
+var logger = loggerConfig.CreateLogger();
+builder.Logging.AddSerilog(logger);
 
 var app = builder.Build();
 

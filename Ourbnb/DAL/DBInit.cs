@@ -23,8 +23,10 @@ namespace Ourbnb.DAL
                         FirstName="Hamza",
                         LastName="Ylli",
                         Address="Pilestreden 32",
-                        Email="Hamza@gmail.com",
-                        Phone=91824521
+                        Phone=91824521,
+                        Email="Hamza@gmail.com"
+                       
+                       
                     },
 
                     new Customer
@@ -32,8 +34,10 @@ namespace Ourbnb.DAL
                         FirstName="Mahdi",
                         LastName="Yusuf",
                         Address="Pilestredet 35",
-                        Email="Mahdi123@gmail.com",
-                        Phone=47782356
+                        Phone=47782356,
+                        Email="Mahdi123@gmail.com"
+                     
+
                     }
                 
                 };

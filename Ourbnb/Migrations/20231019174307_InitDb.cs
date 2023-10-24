@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ourbnb.Migrations
 {
     /// <inheritdoc />
-    public partial class RentalDb : Migration
+    public partial class InitDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,7 +21,8 @@ namespace Ourbnb.Migrations
                     LastName = table.Column<string>(type: "TEXT", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: false),
                     Phone = table.Column<int>(type: "INTEGER", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: false)
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,7 +39,7 @@ namespace Ourbnb.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     FromDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     ToDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    Rating = table.Column<double>(type: "REAL", nullable: false),
+                    Rating = table.Column<double>(type: "REAL", nullable: true),
                     Location = table.Column<string>(type: "TEXT", nullable: false),
                     Price = table.Column<int>(type: "INTEGER", nullable: false),
                     Bilder = table.Column<string>(type: "TEXT", nullable: false),

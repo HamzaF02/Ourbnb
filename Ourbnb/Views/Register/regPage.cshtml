@@ -1,0 +1,42 @@
+﻿@model CreateCustomer
+
+<h2>Register</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="regPage">
+    <div class="form-group">
+        <label asp-for="customer.FirstName"></label><span class="text-danger">*</span>
+        <input asp-for="customer.FirstName" class="form-control" />
+        <span asp-validation-for="customer.FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="customer.LastName"></label><span class="text-danger">*</span>
+        <input asp-for="customer.LastName" class="form-control" />
+        <span asp-validation-for="customer.LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="customer.Address"></label><span class="text-danger">*</span>
+        <input asp-for="customer.Address" class="form-control" />
+        <span asp-validation-for="customer.Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="customer.Phone"></label>
+        <input asp-for="customer.Phone" class="form-control" />
+        <span asp-validation-for="customer.Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="customer.Email"></label>
+        <input asp-for="customer.Email" class="form-control" />
+        <span asp-validation-for="customer.Email" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary button">Register</button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary button">Back to Home</a>
+</form>
+
+
+<style>
+    .button{
+        margin-top:30px;
+    }
+</style>

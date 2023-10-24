@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Rental>
+@{
+    ViewData["Title"] = "Rentals";
+}
 
 <h1>List of Rentals</h1>
 <button class="btn btn-light">
@@ -9,14 +12,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<div class="row row-cols-1  row-cols-xl-3 row-cols-lg-3  row-cols-md-2  row-cols-sm-1 ">
+<div class="row row-cols-1  row-cols-xl-3 row-cols-lg-3  row-cols-md-2  row-cols-sm-1 " style=" width: fit-content;">
     @foreach (var rental in Model)
     {
-
-        <div class="d-flex justify-content-between mt-1"  style="height:35rem">
+        <a class="link-dark " asp-controller="Rental" asp-action="Details" asp-route-id="@rental.RentalId" style="text-decoration:none">
+        <div class="d-flex justify-content-between mt-1" style="height:35rem;">
             <div class="col card " style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; padding: 50px; margin-top: 20px; border-radius: 10px; background-color: white">
                 <div>
-                    <img src="@rental.Bilder" class="card-img-top" alt="@rental.Name">
+                    <img style="border-radius:5px;" src="@rental.Bilder" class="card-img-top" alt="@rental.Name">
                     <div>
                         <div class="d-flex justify-content-between mt-1">
                             <h5 class="text-start" style="margin-top:2rem;">
@@ -43,8 +46,20 @@
                 </div>
             </div>
         </div>
+        </a>
+
     }
+    <a asp-controller="Rental" asp-action="Create" style="text-decoration:none" class="link-dark">
+
+            <div class="d-flex  justify-content-between mt-1" style="height:35rem;">
+            <div class="col addcard" >
+                 <h1 class="add">+</h1>
+                 <p class="add">Post new Rental!</p>
+               </div>
+            </div>
+    </a>
 </div>
+@* <a class="btn btn-primary" asp-controller="Rental" asp-action="Create">Post your Rental!</a> *@
 
 
 <style>
@@ -67,6 +82,24 @@ body {
 
 .nav {
     margin-left: 200px;
+}
+
+.add{
+    margin-top: 100px;
+}
+
+.addcard:hover{
+    border-style:solid;
+}
+
+.addcard{
+        padding: 50px;
+        margin-top: 20px;
+        border-radius: 10px;
+        border: dashed 6px;
+        border-color: black;
+        background-color: #8baec9;
+        text-align: center
 }
 </style>
 
