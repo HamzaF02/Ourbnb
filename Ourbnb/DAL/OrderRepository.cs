@@ -52,7 +52,7 @@ namespace Ourbnb.DAL
         {
             try
             {
-                _db.Orders.Add(order);
+                _db.Orders.Update(order);
                 await _db.SaveChangesAsync();
                 return true;
             }catch (Exception ex)

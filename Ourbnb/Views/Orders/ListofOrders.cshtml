@@ -1,13 +1,18 @@
 ﻿@model IEnumerable<Ourbnb.Models.Order>
 
     <style>
-    
+
+    body {
+        background-color: #8baec9;
+    }
 
 
     </style>
 
 
 <h1>List of Orders</h1>
+
+<div style="background-color:white; padding:20px; border-radius:20px; margin-top:50px;">
 
 <div  style="overflow-x:auto;  ">
     <table class="table table-striped table-dark " style="margin-top:30px; width: 100%; border-collapse: collapse; ">
@@ -49,3 +54,5 @@
 <button class="btn btn-outline-info info" style="margin-top:30px;">
     <a class="link-dark" style="text-decoration:none;" asp-controller="Home" asp-action="Index">Go back Home</a>
 </button>
+
+</div>

@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using Ourbnb.Models;
 namespace Ourbnb.DAL
 {
-	public class RentalDbContext : DbContext
+	public class RentalDbContext : IdentityDbContext
 	{
 		public RentalDbContext(DbContextOptions<RentalDbContext> options) : base(options)
 		{
