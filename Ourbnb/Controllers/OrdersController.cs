@@ -110,6 +110,60 @@ namespace Ourbnb.Controllers
                 return View(CreateOrder);
             }
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Update(int id)
+        {
+            var order = await _repository.getObjectById(id);
+            if (order == null)
+            {
+                return NotFound("Something went wrong, go to homepage");
+            }
+            var CreateOrder = await ViewModel(order.RentalId);
+            return View(CreateOrder);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(Order order)
+        {
+            var CreateOrder = await ViewModel(order.RentalId);
+            try
+            {
+                bool ok = await _repository.Update(order);
+                if (!ok)
+                {
+                    return View(CreateOrder);
+                }
+                return RedirectToAction(nameof(ListofOrders));
+            }
+            catch (Exception ex)
+            {
+                return View(CreateOrder);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var order = await _repository.getObjectById(id);
+            if (order == null)
+            {
+
+                return BadRequest("Something went wrong, return to home page");
+            }
+            return View(order);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            bool OK = await _repository.Delete(id);
+            if (OK) { return RedirectToAction(nameof(ListofOrders)); }
+            return BadRequest("Rental deletion failed, return to homepage");
+        }
     }
 
 }
