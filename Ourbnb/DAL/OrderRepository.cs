@@ -59,7 +59,7 @@ namespace Ourbnb.DAL
             }
             catch(Exception ex)
             {
-                _logger.LogError("[RentalRepository] rental ToListAsync() failed when GetAll(), error message: {ex}", ex.Message);
+                _logger.LogError("[OrderRepository] order ToListAsync() failed when GetAll(), error message: {ex}", ex.Message);
                 return null;
             }
         }
@@ -72,7 +72,7 @@ namespace Ourbnb.DAL
             }
             catch (Exception ex)
             {
-                _logger.LogError("[OrderRepository] rental FindAsync(id) failed when GetObjectById for OrderId {OrderId:0000}, error message: {ex}", id, ex.Message);
+                _logger.LogError("[OrderRepository] order FindAsync(id) failed when GetObjectById for OrderId {OrderId:0000}, error message: {ex}", id, ex.Message);
                 return null;
             }
         }
@@ -86,7 +86,7 @@ namespace Ourbnb.DAL
                 return true;
             }catch (Exception ex)
             {
-                _logger.LogError("[OrderRepository] rental FindAync(id) failed when updating the OrderId {OrderId:0000}, error message: {ex}", order, ex.Message);
+                _logger.LogError("[OrderRepository] order FindAync(id) failed when updating the OrderId {OrderId:0000}, error message: {ex}", order, ex.Message);
                 return false;
             }
         }
