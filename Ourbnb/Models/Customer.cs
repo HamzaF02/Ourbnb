@@ -8,22 +8,22 @@ namespace Ourbnb.Models
     {
         public int CustomerId { get; set; }
 
-        [RegularExpression(@"[a-zA-ZæøåÆØÅ]{1,20}", ErrorMessage = "First Name must be letters between 1 to 20 charachters")]
+        [RegularExpression(@"[a-zA-ZæøåÆØÅ]{1,20}", ErrorMessage = "First Name must be letters between 1 to 20 characters")]
         public string FirstName { get; set; } = string.Empty;
 
-        [RegularExpression(@"[a-zA-ZæøåÆØÅ]{1,20}", ErrorMessage = "Last Name must be letters between 1 to 20 charachters")]
+        [RegularExpression(@"[a-zA-ZæøåÆØÅ]{1,20}", ErrorMessage = "Last Name must be letters between 1 to 20 characters")]
         public string LastName { get; set; } = string.Empty;
 
-        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{1,50}", ErrorMessage = "Adress must be letters and numbers between 1 to 50 charachters")]
+        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{1,50}", ErrorMessage = "Adress must be letters and numbers between 1 to 50 characters")]
         public string Address { get; set; } = string.Empty;
 
         [RegularExpression(@"[0-9]{8}", ErrorMessage = "Phone number must be 8 numbers")]
         public int Phone { get; set; }
 
-        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{1,50}", ErrorMessage = "Email must be letters and numbers between 1 to 50 charachters")]
+        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{1,50}", ErrorMessage = "Email must be letters and numbers between 1 to 50 characters")]
         public string Email { get; set; } = string.Empty;
 
-        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{1,50}", ErrorMessage = "Password must be letters and numbers between 1 to 50 charachters")]
+        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{1,50}", ErrorMessage = "Password must be letters and numbers between 1 to 50 characters")]
 
         public virtual List<Order>? Orders { get; set; }
     }
