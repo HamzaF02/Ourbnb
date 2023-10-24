@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Ourbnb.Models.Order>
 
+
     <style>
 
     body {
@@ -14,45 +15,52 @@
 
 <div style="background-color:white; padding:20px; border-radius:20px; margin-top:50px;">
 
-<div  style="overflow-x:auto;  ">
-    <table class="table table-striped table-dark " style="margin-top:30px; width: 100%; border-collapse: collapse; ">
-    <thead>
-        <tr>
-            <th scope="col">Order #</th>
-            <th scope="col">From</th>
-            <th scope="col">To</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Customer</th>
-            <th scope="col">Rental</th>
-            <th scope="col">Total Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            if (item != null)
-            {
+  
 
+    <div style="overflow-x:auto;  ">
+        <table class="table table-striped table-dark " style="margin-top:30px; width: 100%; border-collapse: collapse; ">
+            <thead>
                 <tr>
-                   
-                    <td>@item.OrderId</td>
-                    <td>@item.From</td>
-                    <td>@item.To</td>
-                    <td>@item.Rating</td>
-                    <td>@item.Customer.FirstName @item.Customer.LastName</td>
-                    <td>@item.Rental.Name</td>
-                    <td>@item.TotalPrice</td>
-                  
+                    <th scope="col">Order #</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Rental</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Actions</th>
                 </tr>
-            }
-        }
-    </tbody>
-</table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item != null)
+                    {
+
+                        <tr>
+
+                            <td>@item.OrderId</td>
+                            <td>@item.From.ToString("d")</td>
+                            <td>@item.To.ToString("d")</td>
+                            <td>@item.Rating</td>
+                            <td>@item.Customer.FirstName @item.Customer.LastName</td>
+                            <td>@item.Rental.Name</td>
+                            <td>@item.TotalPrice</td>
+                            <td class="justify-content-between">
+                                <button class="btn btn-info">Update</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 
 
-<button class="btn btn-outline-info info" style="margin-top:30px;">
-    <a class="link-dark" style="text-decoration:none;" asp-controller="Home" asp-action="Index">Go back Home</a>
-</button>
+    <button class="btn btn-outline-info info" style="margin-top:30px;">
+        <a class="link-dark" style="text-decoration:none;" asp-controller="Home" asp-action="Index">Go back Home</a>
+    </button>
 
 </div>
