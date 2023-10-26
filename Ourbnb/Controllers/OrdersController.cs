@@ -7,6 +7,7 @@ using Ourbnb.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Configuration;
 using NuGet.Protocol.Core.Types;
+using Castle.Core.Resource;
 
 namespace Ourbnb.Controllers
 {
@@ -131,7 +132,27 @@ namespace Ourbnb.Controllers
             CreateOrder.Order = order;
             try
             {
-                bool ok = await _repository.Update(order);
+                var customer = await _Crepository.getObjectById(order.CustomerId);
+                var rental = await _Rrepository.getObjectById(order.RentalId);
+                if (customer == null || rental == null)
+                {
+                    return View(CreateOrder);
+                }
+                var Days = order.To - order.From;
+                var total = Days.Days * rental.Price;
+
+                Order newOrder = new Order
+                {
+                    Customer = customer,
+                    Rental = order.Rental,
+                    CustomerId = order.CustomerId,
+                    RentalId = order.RentalId,
+                    From = order.From,
+                    To = order.To,
+                    TotalPrice = total,
+                    Rating = order.Rating,
+                };
+                bool ok = await _repository.Update(newOrder);
                 if (ok)
                 {
                     await UpdateRental(order.RentalId);
