@@ -54,6 +54,11 @@ namespace Ourbnb.Controllers
         public async Task<IActionResult> ListofOrders()
         {
             var orders = await _repository.GetAll();
+            if(orders == null)
+            {
+                _logger.LogError("[OrderController] Orderlist not found while executing _repository-GetAll()");
+                return NotFound("Orderlist not found");
+            }
             return View(orders);
         }
 
