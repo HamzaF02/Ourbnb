@@ -110,6 +110,7 @@ namespace Ourbnb.Controllers
                     Price = rental.Price,
                     Bilder = rental.Bilder,
                     Location = rental.Location,
+                    IdentityId = owner.IdentityId,
                     Rating = 0
                 };
 

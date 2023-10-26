@@ -21,7 +21,8 @@ namespace Ourbnb.Models
         public string? Bilder { get; set; }
         [Display(Name = "Owners")]
         public int OwnerId { get; set; }
-        public virtual Customer Owner { get; set; } = default!;
+        public string IdentityId { get; set; }
+    public virtual Customer Owner { get; set; } = default!;
         public virtual List<Order>? Orders { get; set; }
 
         internal void UpdateRating()
