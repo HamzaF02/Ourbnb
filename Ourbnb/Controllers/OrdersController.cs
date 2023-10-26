@@ -30,7 +30,10 @@ namespace Ourbnb.Controllers
         {
             var customers = await _Crepository.GetAll();
             var rental = await _Rrepository.getObjectById(id);
-            if (rental == null) { return null; }
+            if (rental == null)
+            {
+                _logger.LogError("[OrdersController] rental list not found while executing _Rrepository.GetObjectById(id)");
+            }
 
 
             var CreateOrder = new CreateOrder
@@ -69,6 +72,11 @@ namespace Ourbnb.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var CreateOrder = await ViewModel(id);
+            if(CreateOrder == null)
+            {
+                _logger.LogError("[OrderController] Orderlist not found while executing _Crepository-GetAll()");
+                return NotFound("Orderlist not found");
+            }
             return View(CreateOrder);
         }
         [HttpPost]
@@ -85,6 +93,7 @@ namespace Ourbnb.Controllers
 
                 if (customer == null || rental == null)
                 {
+                    _logger.LogError("[OrdersController] Failed to find customer or rental with _Crepository.getObjectById() or _Rrepository.getObjectById()");
                     return View(CreateOrder);
                 }
                 var Days = order.To - order.From;
@@ -105,6 +114,7 @@ namespace Ourbnb.Controllers
                 bool ok = await _repository.Create(newOrder);
                 if (!ok)
                 {
+                    _logger.LogWarning("[OrdersController] newOrder creation failed {@newOrder}", newOrder);
                     return View(CreateOrder);
                 }
                 await UpdateRental(rental);
@@ -112,6 +122,7 @@ namespace Ourbnb.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogWarning("[OrdersController] newOrder creation failed {@CreateOrder}", CreateOrder);
                 return View(CreateOrder);
             }
         }
@@ -141,6 +152,7 @@ namespace Ourbnb.Controllers
                 var rental = await _Rrepository.getObjectById(order.RentalId);
                 if (customer == null || rental == null)
                 {
+                    _logger.LogError("[OrdersController] Failed to find customer or rental with _Crepository.getObjectById() or _Rrepository.getObjectById()");
                     return View(CreateOrder);
                 }
                 var Days = order.To - order.From;
@@ -163,10 +175,12 @@ namespace Ourbnb.Controllers
                     await UpdateRental(order.RentalId);
                     return RedirectToAction(nameof(ListofOrders));
                 }
+                _logger.LogError("[OrdersController] Order failed to update {@order}", order);
                 return View(CreateOrder);
             }
             catch (Exception ex)
             {
+                _logger.LogError("[OrdersController] Order failed to update {@order}", order);
                 return View(CreateOrder);
             }
         }
@@ -178,6 +192,7 @@ namespace Ourbnb.Controllers
             var order = await _repository.getObjectById(id);
             if (order == null)
             {
+                _logger.LogError("[OrdersController] Order not found for the id {@id}", id);
                 return BadRequest("Something went wrong, return to home page");
             }
             return View(order);
@@ -194,6 +209,7 @@ namespace Ourbnb.Controllers
                 await UpdateRental(order.RentalId);
                 return RedirectToAction(nameof(ListofOrders));
             }
+            _logger.LogError("[OrdersController] Order deletion failed for the order.Rentalid {@order.RentalId}", id);
             return BadRequest("Rental deletion failed, return to homepage");
         }
 
