@@ -7,7 +7,7 @@
 <form asp-action="Create">
     <label>Rental: @Model.Rental.Name</label>
     <input asp-for="Order.RentalId" type="hidden" value="@Model.Rental.RentalId">
-    <label>Customer: @Model.Customer.FirstName + @Model.Customer.LastName</label>
+    <label>Customer: @Model.Customer.FirstName @Model.Customer.LastName</label>
     <input asp-for="Order.CustomerId" type="hidden" value="@Model.Customer.CustomerId">
     <div class="form-group">
         <label asp-for="Order.From" asp-item></label>
