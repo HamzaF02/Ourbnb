@@ -43,18 +43,25 @@ namespace Ourbnb.Controllers
 
         public async Task<IActionResult> Table()
         {
-            _logger.LogInformation("This is an error message");
-            _logger.LogWarning("This is a warning");
-            _logger.LogError("Error!!!!");
             var rentals =  await _repository.GetAll();
+            if(rentals == null)
+            {
+                _logger.LogError("[RentalController] Rental list not found while executing _repository.GetAll()");
+                return NotFound("Rental list not found");
+            }
             ViewBag.CurrentViewName = "Table";
             return View(rentals);
         }
 
         public async Task<IActionResult> Grid()
         {
-            ViewBag.CurrentViewName = "Grid";
             var rentals = await _repository.GetAll();
+            if(rentals == null)
+            {
+                _logger.LogError("[RentalController] Rental list not found while executing _repository.GetAll()");
+                return NotFound("Rental list not found");
+            }
+            ViewBag.CurrentViewName = "Grid";
             return View(rentals);
         }
 
@@ -63,7 +70,8 @@ namespace Ourbnb.Controllers
             var rental = await _repository.getObjectById(id);
             if(rental == null)
             {
-                return NotFound("Nothing here");
+                _logger.LogError("[RentalController] Rental list not found for the RentalId {RentalId:0000}", id);
+                return NotFound("Rental not found for the RentalId");
             }
         
             return View(rental);
@@ -107,12 +115,14 @@ namespace Ourbnb.Controllers
 
 
                 bool ok = await _repository.Create(newRental);
-                if(!ok) {        
+                if(!ok) {
+                    _logger.LogWarning("[RentalController] Rental creation failed {@rental}", rental);
                     return View(CreateRental);
                 }
                 return RedirectToAction(nameof(Grid));
             }catch (Exception ex)
             {
+                _logger.LogWarning("[RentalController] Rental creation failed {@rental}", rental);
                 return View(CreateRental);
             }
         }
@@ -124,7 +134,8 @@ namespace Ourbnb.Controllers
             var rental = await _repository.getObjectById(id);
             if (rental == null)
             {
-                return NotFound("Nothing here");
+                _logger.LogError("[RentalController] Rental not found when updating the RentalId {RentalId:0000}", id);
+                return BadRequest("Rental not found for the RentalId");
             }
             var CreateRental = await ViewModel();
             CreateRental.Rental = rental;
@@ -142,12 +153,14 @@ namespace Ourbnb.Controllers
                 bool ok = await _repository.Update(rental);
                 if (!ok)
                 {
+                    _logger.LogWarning("[RentalController] Rental update failed {@rental}", rental);
                     return View(CreateRental);
                 }
                 return RedirectToAction(nameof(Grid));
             }
             catch (Exception ex)
             {
+                _logger.LogWarning("[RentalController] Rental update failed {@rental}", rental);
                 return View(CreateRental);
             }
         }
@@ -159,7 +172,7 @@ namespace Ourbnb.Controllers
             var rental = await _repository.getObjectById(id);
             if (rental == null)
             {
-
+                _logger.LogError("[RentalController] Rental not found for the RentalId {RentalId:0000}", id);
                 return BadRequest("Something went wrong, return to home page");
             }
             return View(rental);
@@ -170,10 +183,14 @@ namespace Ourbnb.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             bool OK = await _repository.Delete(id);
-            if (OK) { return RedirectToAction(nameof(Grid)); }
+            if (!OK) {
+                _logger.LogError("[RentalController] Rental deletion failed for the RentalId {RentalId:0000}", id);
+                return BadRequest("Rental deletion failed, return to homepage");
 
+            }
 
-            return BadRequest("Rental deletion failed, return to homepage");
+            return RedirectToAction(nameof(Grid));
+            
         }
 
 
