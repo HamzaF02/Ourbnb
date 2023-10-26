@@ -34,13 +34,13 @@ namespace Ourbnb.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> regPage()
+        public async Task<IActionResult> Register()
         {
             var createCustomer = await ViewModel();
             return View(createCustomer);
         }
         [HttpPost]
-        public async Task<IActionResult> regPage(Customer customer)
+        public async Task<IActionResult> Register(Customer customer)
         {
 
             var CreateCustomer = await ViewModel();
@@ -57,7 +57,9 @@ namespace Ourbnb.Controllers
                         LastName = customer.LastName,
                         Address = customer.Address,
                         Phone = customer.Phone,
-                        Email = customer.Email
+                        Email = customer.Email,
+                        IdentityId = customer.IdentityId
+                        
 
                     };
 
@@ -67,7 +69,7 @@ namespace Ourbnb.Controllers
                     {
                         return View(CreateCustomer);
                     }
-                    return RedirectToAction(nameof(regPage));
+                    return RedirectToAction(nameof(Register));
                 }
                 catch (Exception ex)
                 {

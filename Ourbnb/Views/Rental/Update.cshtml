@@ -8,6 +8,7 @@
     <input type="hidden" asp-for="Rental.OwnerId" />
     <input type="hidden" asp-for="Rental.Owner" />
     <input type="hidden" asp-for="Rental.Rating" />
+    <input type="hidden" asp-for="Rental.IdentityId" />
     <div class="form-group">
         <label asp-for="Rental.Name"></label><span class="text-danger">*</span>
         <input asp-for="Rental.Name" class="form-control" />
@@ -25,12 +26,12 @@
     </div>
     <div class="form-group">
         <label asp-for="Rental.FromDate"></label>
-        <input asp-for="Rental.FromDate" class="form-control" type="date" />
+        <input asp-for="Rental.FromDate" class="form-control" value="" type="date" />
         <span asp-validation-for="Rental.FromDate" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Rental.ToDate"></label>
-        <input asp-for="Rental.ToDate" class="form-control" type="date" />
+        <input asp-for="Rental.ToDate" class="form-control" value="" type="date" />
         <span asp-validation-for="Rental.ToDate" class="text-danger"></span>
     </div>
     <div class="form-group">

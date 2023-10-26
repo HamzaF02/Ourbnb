@@ -12,7 +12,7 @@ namespace Ourbnb.Models
         [DataType(DataType.Date)]
         public DateTime To { get; set; }
         public int? Rating { get; set; }
-        public int CustomerId { get; set; }
+        public int CustomerId { get; set; } = default!;
         public virtual Customer Customer { get; set; } = default!;
         public int RentalId { get; set; }
         public virtual Rental Rental { get; set;} = default!;
