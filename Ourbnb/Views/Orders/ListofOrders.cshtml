@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Ourbnb.Models.Order>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
 
 
 <style>
@@ -36,21 +39,46 @@
                     if (item != null)
                     {
 
-                        <tr>
+                        if (item.Customer.IdentityId == UserManager.GetUserId(User))
+                        {
 
-                            <td>@item.OrderId</td>
-                            <td>@item.From.ToString("d")</td>
-                            <td>@item.To.ToString("d")</td>
-                            <td>@item.Rating</td>
-                            <td>@item.Customer.FirstName @item.Customer.LastName</td>
-                            <td>@item.Rental.Name</td>
-                            <td>@item.TotalPrice</td>
-                            <td class="justify-content-between">
-                                <a class="btn btn-info" asp-action="Update" asp-route-id="@item.OrderId">Update</a>
-                                <a class="btn btn-danger" asp-action="Deletes" asp-route-id="@item.OrderId">Delete</a>
-                            </td>
 
-                        </tr>
+                            <tr>
+
+                                <td>@item.OrderId</td>
+                                <td>@item.From.ToString("d")</td>
+                                <td>@item.To.ToString("d")</td>
+                                <td>@item.Rating</td>
+                                <td>@item.Customer.FirstName @item.Customer.LastName</td>
+                                <td>@item.Rental.Name</td>
+                                <td>@item.TotalPrice</td>
+                                <td>
+                                    <button asp-controller="Orders" asp-action="Update" class="btn btn-info">Update</button>
+                                    <button asp-controller="Orders" asp-action="Delete" class="btn btn-danger">Delete</button>
+                                </td>
+
+                            </tr>
+                        }
+                        else
+                        {
+
+                            <tr>
+
+                                <td>@item.OrderId</td>
+                                <td>@item.From.ToString("d")</td>
+                                <td>@item.To.ToString("d")</td>
+                                <td>@item.Rating</td>
+                                <td>@item.Customer.FirstName @item.Customer.LastName</td>
+                                <td>@item.Rental.Name</td>
+                                <td>@item.TotalPrice</td>
+                                <td>
+                                </td>
+
+                            </tr>
+
+                        }
+
+
                     }
                 }
             </tbody>
@@ -58,7 +86,8 @@
     </div>
 
 
- <a class="link-dark btn btn-outline-info info" style="text-decoration:none; margin-top:30px;" asp-controller="Home" asp-action="Index">Go back Home</a>
-
+    <button class="btn btn-outline-info info" style="margin-top:30px;">
+        <a class="link-dark" style="text-decoration:none;" asp-controller="Home" asp-action="Index">Go back Home</a>
+    </button>
 
 </div>

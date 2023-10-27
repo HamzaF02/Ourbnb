@@ -121,13 +121,13 @@ namespace Ourbnb.Controllers
                     _logger.LogError("[OrdersController] Failed to find customer or rental with _Crepository.getObjectById() or _Rrepository.getObjectById()");
                     return View(CreateOrder);
                 }
-                var Days = order.To - order.From;
-                var total = Days.Days * rental.Price;
+                    var Days = order.To - order.From;
+                    var total = Days.Days * rental.Price;
 
                 Order newOrder = new Order { };
-                if(order.From >= rental.FromDate && order.From >= DateTime.Now.Date && order.From < rental.ToDate && order.From < order.To && order.To <= rental.ToDate)
+                if(order.From > rental.FromDate && order.From > DateTime.Now.Date && order.From < rental.ToDate && order.From < order.To && order.To < rental.ToDate)
                 {
-                newOrder = new Order
+                    newOrder = new Order
                     {
                         Customer = customer,
                         Rental = rental,
@@ -208,26 +208,19 @@ namespace Ourbnb.Controllers
                 }
                 var Days = order.To - order.From;
                 var total = Days.Days * rental.Price;
-                Order newOrder = new Order { };
-                if (order.From >= rental.FromDate && order.From >= DateTime.Now.Date && order.From < rental.ToDate && order.From < order.To && order.To <= rental.ToDate)
+
+                Order newOrder = new Order
                 {
-                    newOrder = new Order
-                    {
-                        Customer = customer,
-                        Rental = rental,
-                        CustomerId = order.CustomerId,
-                        RentalId = order.RentalId,
-                        From = order.From,
-                        To = order.To,
-                        TotalPrice = total,
-                        Rating = order.Rating,
-                    };
-                }
-                else
-                {
-                    _logger.LogError("dates for order are invalid");
-                    return View(CreateOrder);
-                }
+                    OrderId = order.OrderId,
+                    Customer = customer,
+                    Rental = order.Rental,
+                    CustomerId = order.CustomerId,
+                    RentalId = order.RentalId,
+                    From = order.From,
+                    To = order.To,
+                    TotalPrice = total,
+                    Rating = order.Rating,
+                };
                 bool ok = await _repository.Update(newOrder);
                 if (ok)
                 {
