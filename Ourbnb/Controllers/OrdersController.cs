@@ -35,8 +35,10 @@ namespace Ourbnb.Controllers
             if (rental == null)
             {
                 _logger.LogError("[OrdersController] rental list not found while executing _Rrepository.GetObjectById(id)");
+                return null;
             }
-            Customer customer = null;
+
+            Customer customer = new Customer();
 
             foreach (var i in customers)
             {
@@ -49,6 +51,7 @@ namespace Ourbnb.Controllers
             if (customer == null)
             {
                 _logger.LogError("[OrdersController] Customer matching identityId in list not found while executing _Rrepository.GetObjectById(id)");
+                return null;
             }
 
             var CreateOrder = new CreateOrder
@@ -137,7 +140,7 @@ namespace Ourbnb.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogWarning("[OrdersController] newOrder creation failed {@CreateOrder}", CreateOrder);
+                _logger.LogWarning("[OrdersController] newOrder creation failed {@CreateOrder}, error message: {ex}", CreateOrder, ex.Message);
                 return View(CreateOrder);
             }
         }
@@ -152,7 +155,12 @@ namespace Ourbnb.Controllers
                 return NotFound("Something went wrong, go to homepage");
             }
             var CreateOrder = await ViewModel(order.RentalId);
-            CreateOrder.Order = order;
+            if(CreateOrder != null)
+            {
+                CreateOrder.Order = order;
+               
+            }
+
             return View(CreateOrder);
         }
         
@@ -195,7 +203,7 @@ namespace Ourbnb.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError("[OrdersController] Order failed to update {@order}", order);
+                _logger.LogError("[OrdersController] Order failed to update {@order}, error message: {ex} ", order, ex.Message);
                 return View(CreateOrder);
             }
         }
