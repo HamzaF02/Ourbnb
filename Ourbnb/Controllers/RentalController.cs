@@ -18,7 +18,7 @@ namespace Ourbnb.Controllers
         private readonly IRepository<Customer> _Crepository;
         private readonly ILogger<RentalController> _logger;
 
-        public async Task<CreateRental> ViewModel()
+        public async Task<CreateRental?> ViewModel()
         {
             var identity = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var owners = await _Crepository.GetAll();
@@ -111,6 +111,11 @@ namespace Ourbnb.Controllers
         public async Task<IActionResult> Create(Rental rental)
         {
             var CreateRental = await ViewModel();
+            if (CreateRental == null)
+            {
+                _logger.LogError("[RentalController] Error making ViewModel while executing Create()");
+                return NotFound("ViewModel Error, return home");
+            }
             CreateRental.Rental = rental;
             try { 
                 var owner = await _Crepository.getObjectById(rental.OwnerId);
@@ -172,6 +177,11 @@ namespace Ourbnb.Controllers
                 return BadRequest("Rental not found for the RentalId");
             }
             var CreateRental = await ViewModel();
+            if (CreateRental == null)
+            {
+                _logger.LogError("[RentalController] Error making ViewModel while executing Update()");
+                return NotFound("ViewModel Error, return home");
+            }
             CreateRental.Rental = rental;
 
             return View(CreateRental);
@@ -181,6 +191,11 @@ namespace Ourbnb.Controllers
         public async Task<IActionResult> Update(Rental rental)
         {
             var CreateRental = await ViewModel();
+            if (CreateRental == null)
+            {
+                _logger.LogError("[RentalController] Error making ViewModel while executing Update()");
+                return NotFound("ViewModel Error, return home");
+            }
             CreateRental.Rental = rental;
             try
             {
@@ -194,7 +209,7 @@ namespace Ourbnb.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogWarning("[RentalController] Rental update failed {@rental}", rental);
+                _logger.LogWarning("[RentalController] Rental update failed {@rental}, error message: {ex}", rental,ex.Message);
                 return View(CreateRental);
             }
         }
