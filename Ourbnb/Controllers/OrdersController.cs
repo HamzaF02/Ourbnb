@@ -142,6 +142,7 @@ namespace Ourbnb.Controllers
                 else
                 {
                     _logger.LogError("dates for order are invalid");
+                    return View(CreateOrder);
                 }
 
                 
