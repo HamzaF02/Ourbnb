@@ -39,7 +39,7 @@ namespace Ourbnb.DAL
             return true;
         }
 
-        public async Task<IEnumerable<Customer>> GetAll()
+        public async Task<IEnumerable<Customer>?> GetAll()
         {
             return await _db.Customers.ToListAsync();
         }

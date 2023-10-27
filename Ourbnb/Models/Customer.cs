@@ -24,7 +24,7 @@ namespace Ourbnb.Models
         [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{1,50}", ErrorMessage = "Email must be letters and numbers between 1 to 50 characters")]
         public string Email { get; set; } = string.Empty;
 
-        public string IdentityId { get; set; }
+        public string IdentityId { get; set; } = string.Empty;
 
         public virtual List<Order>? Orders { get; set; }
     }

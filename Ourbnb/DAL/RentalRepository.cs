@@ -42,7 +42,7 @@ namespace Ourbnb.DAL
             return await _db.Rentals.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Rental>> GetAll()
+        public async Task<IEnumerable<Rental>?> GetAll()
         {
             return await _db.Rentals.ToListAsync();
         }

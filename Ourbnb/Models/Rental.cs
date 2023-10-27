@@ -21,12 +21,17 @@ namespace Ourbnb.Models
         public string? Bilder { get; set; }
         [Display(Name = "Owners")]
         public int OwnerId { get; set; }
-        public string IdentityId { get; set; }
-    public virtual Customer Owner { get; set; } = default!;
+        public string IdentityId { get; set; } = string.Empty;
+        public virtual Customer Owner { get; set; } = default!;
         public virtual List<Order>? Orders { get; set; }
 
         internal void UpdateRating()
         {
+            if(Orders == null)
+            {
+                Rating = 0; return;
+            }
+
             double rating = 0;
             foreach (var o in Orders)
             {
