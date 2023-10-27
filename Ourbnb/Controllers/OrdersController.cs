@@ -27,8 +27,9 @@ namespace Ourbnb.Controllers
             _Crepository = crepository;
             _Rrepository = Rrepository;
         }
-        public async Task<CreateOrder?> ViewModel(int id, string identity)
+        public async Task<CreateOrder?> ViewModel(int id)
         {
+            var identity = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customers = await _Crepository.GetAll();
             var rental = await _Rrepository.getObjectById(id);
             if (rental == null)
@@ -86,8 +87,7 @@ namespace Ourbnb.Controllers
         [Authorize]
         public async Task<IActionResult> Create(int id)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var CreateOrder = await ViewModel(id, userId);
+            var CreateOrder = await ViewModel(id);
             if (CreateOrder == null)
             {
                 _logger.LogError("[OrderController] Error making ViewModel while executing _Crepository-GetAll()");
@@ -96,12 +96,9 @@ namespace Ourbnb.Controllers
             return View(CreateOrder);
         }
         [HttpPost]
-
-
         public async Task<IActionResult> Create(Order order)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var CreateOrder = await ViewModel(order.RentalId, userId);
+            var CreateOrder = await ViewModel(order.RentalId);
             if (CreateOrder == null) { return BadRequest("Something went wrong, return home"); }
             CreateOrder.Order = order;
             try
@@ -140,7 +137,7 @@ namespace Ourbnb.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogWarning("[OrdersController] newOrder creation failed {@CreateOrder}, error message {ex}", CreateOrder, ex.Message);
+                _logger.LogWarning("[OrdersController] newOrder creation failed {@CreateOrder}", CreateOrder);
                 return View(CreateOrder);
             }
         }
@@ -154,62 +151,53 @@ namespace Ourbnb.Controllers
             {
                 return NotFound("Something went wrong, go to homepage");
             }
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var CreateOrder = await ViewModel(order.RentalId, userId);
+            var CreateOrder = await ViewModel(order.RentalId);
             CreateOrder.Order = order;
             return View(CreateOrder);
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> Update(Order order)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var CreateOrder = await ViewModel(order.RentalId, userId);
-
-            if (CreateOrder != null)
+            var CreateOrder = await ViewModel(order.RentalId);
+            CreateOrder.Order = order;
+            try
             {
-                CreateOrder.Order = order;
-            }
-                try
+                var customer = await _Crepository.getObjectById(order.CustomerId);
+                var rental = await _Rrepository.getObjectById(order.RentalId);
+                if (customer == null || rental == null)
                 {
-                    var customer = await _Crepository.getObjectById(order.CustomerId);
-                    var rental = await _Rrepository.getObjectById(order.RentalId);
-                    if (customer == null || rental == null)
-                    {
-                        _logger.LogError("[OrdersController] Failed to find customer or rental with _Crepository.getObjectById() or _Rrepository.getObjectById()");
-                        return View(CreateOrder);
-                    }
-                    var Days = order.To - order.From;
-                    var total = Days.Days * rental.Price;
+                    _logger.LogError("[OrdersController] Failed to find customer or rental with _Crepository.getObjectById() or _Rrepository.getObjectById()");
+                    return View(CreateOrder);
+                }
+                var Days = order.To - order.From;
+                var total = Days.Days * rental.Price;
 
-                    Order newOrder = new Order
-                    {
-                        Customer = customer,
-                        Rental = order.Rental,
-                        CustomerId = order.CustomerId,
-                        RentalId = order.RentalId,
-                        From = order.From,
-                        To = order.To,
-                        TotalPrice = total,
-                        Rating = order.Rating,
-                    };
-                    bool ok = await _repository.Update(newOrder);
-                    if (ok)
-                    {
-                        await UpdateRental(order.RentalId);
-                        return RedirectToAction(nameof(ListofOrders));
-                    }
-                    _logger.LogError("[OrdersController] Order failed to update {@order}", order);
-                    return View(CreateOrder);
-                }
-                catch (Exception ex)
+                Order newOrder = new Order
                 {
-                    _logger.LogError("[OrdersController] Order failed to update {@order}, error message {ex}", order, ex.Message);
-                    return View(CreateOrder);
+                    Customer = customer,
+                    Rental = order.Rental,
+                    CustomerId = order.CustomerId,
+                    RentalId = order.RentalId,
+                    From = order.From,
+                    To = order.To,
+                    TotalPrice = total,
+                    Rating = order.Rating,
+                };
+                bool ok = await _repository.Update(newOrder);
+                if (ok)
+                {
+                    await UpdateRental(order.RentalId);
+                    return RedirectToAction(nameof(ListofOrders));
                 }
-            
+                _logger.LogError("[OrdersController] Order failed to update {@order}", order);
+                return View(CreateOrder);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("[OrdersController] Order failed to update {@order}", order);
+                return View(CreateOrder);
+            }
         }
 
         [HttpGet]
@@ -243,14 +231,8 @@ namespace Ourbnb.Controllers
         public async Task UpdateRental(int id)
         {
             var rental = await _Rrepository.getObjectById(id);
-
-            if(rental != null)
-            {
-                rental.UpdateRating();
-                await _Rrepository.Update(rental);
-            }
-         
-            
+            rental.UpdateRating();
+            await _Rrepository.Update(rental);
         }
         public async Task UpdateRental(Rental rental)
         {
