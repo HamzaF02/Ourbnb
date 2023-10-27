@@ -125,10 +125,11 @@ namespace Ourbnb.Controllers
                     var total = Days.Days * rental.Price;
 
                 Order newOrder = new Order { };
-                if(order.From > rental.FromDate && order.From > DateTime.Now.Date && order.From < rental.ToDate && order.From < order.To && order.To < rental.ToDate)
+                if(order.From >= rental.FromDate && order.From >= DateTime.Now.Date && order.From < rental.ToDate && order.From < order.To && order.To <= rental.ToDate)
                 {
                     newOrder = new Order
                     {
+                        OrderId = order.OrderId,
                         Customer = customer,
                         Rental = rental,
                         CustomerId = order.CustomerId,

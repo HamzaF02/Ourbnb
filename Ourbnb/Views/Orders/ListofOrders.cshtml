@@ -53,8 +53,8 @@
                                 <td>@item.Rental.Name</td>
                                 <td>@item.TotalPrice</td>
                                 <td>
-                                    <button asp-controller="Orders" asp-action="Update" class="btn btn-info">Update</button>
-                                    <button asp-controller="Orders" asp-action="Delete" class="btn btn-danger">Delete</button>
+                                    <a asp-controller="Orders" asp-action="Update" class="btn btn-info" asp-route-id="@item.OrderId">Update</a>
+                                    <a asp-controller="Orders" asp-action="Delete" class="btn btn-danger" asp-route-id="@item.OrderId">Delete</a>
                                 </td>
 
                             </tr>
@@ -86,8 +86,6 @@
     </div>
 
 
-    <button class="btn btn-outline-info info" style="margin-top:30px;">
-        <a class="link-dark" style="text-decoration:none;" asp-controller="Home" asp-action="Index">Go back Home</a>
-    </button>
+        <a class="btn btn-outline-info info" style="margin-top:30px;" asp-controller="Home" asp-action="Index">Go back Home</a>
 
 </div>

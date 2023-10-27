@@ -44,17 +44,18 @@
                 <h3 class="pull-right">Location: @Model.Location</h3>
                 <h5 class="pull-right">Owner: @Model.Owner.FirstName @Model.Owner.LastName</h5>
                 <h5>@Model.Description</h5>
+                <h5>Available from @Model.FromDate.ToString("d") to @Model.ToDate.ToString("d")</h5>
                 <h5 class="pull-right">Price per/n: @Model.Price.ToString("0.00 NOK")</h5>
                 <h5 class="pull-right">Rating: @Model.Rating</h5>
                 <div style="margin-top:30px;">
 
-                    <a asp-controller="Rental" asp-action="Update" class="btn btn-outline-primary info" style="margin:0px; line-height: -20px; text-align: center; font-weight:bold;" asp-route-id="@Model.RentalId">Update Rental</a>
+                    <a asp-controller="Rental" asp-action="Update" class="btn btn-outline-primary info" style="margin:0px; line-height: -20px; text-align: center;" asp-route-id="@Model.RentalId">Update Rental</a>
 
-                    <a asp-controller="Rental" asp-action="Delete" class="btn btn-outline-danger info" style="margin:0px; line-height: -20px; text-align: center; font-weight:bold;" asp-route-id="@Model.RentalId">Delete</a>
+                    <a asp-controller="Rental" asp-action="Delete" class="btn btn-outline-danger info" style="margin:0px; line-height: -20px; text-align: center;" asp-route-id="@Model.RentalId">Delete</a>
 
-                    <a class="btn btn-outline-info info" style="margin:0px; line-height: -20px; text-align: center; font-weight:bold;" asp-action="Table"> Back to Table View</a>
+                    <a class="btn btn-outline-info info" style="margin:0px; line-height: -20px; text-align: center;" asp-action="Table"> Back to Table View</a>
 
-                    <a class="btn btn-outline-info info" style="margin:0px; line-height: -20px; text-align: center; font-weight:bold;" asp-action="Grid">Back to Grid View</a>
+                    <a class="btn btn-outline-info info" style="margin:0px; line-height: -20px; text-align: center;" asp-action="Grid">Back to Grid View</a>
 
                 </div>
 
