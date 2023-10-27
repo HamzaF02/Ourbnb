@@ -143,7 +143,7 @@ namespace Ourbnb.Controllers
                 return RedirectToAction(nameof(Grid));
             }catch (Exception ex)
             {
-                _logger.LogWarning("[RentalController] Rental creation failed {@rental}, error message: {ex}", rental, ex.);
+                _logger.LogWarning("[RentalController] Rental creation failed {@rental}, error message: {ex}", rental, ex.Message);
                 return View(CreateRental);
             }
         }
