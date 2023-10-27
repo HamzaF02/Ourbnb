@@ -31,14 +31,17 @@ namespace Ourbnb.Controllers
         {
             var identity = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customers = await _Crepository.GetAll();
+
             var rental = await _Rrepository.getObjectById(id);
-            if (rental == null)
+            if (rental == null || customers == null)
             {
-                _logger.LogError("[OrdersController] rental list not found while executing _Rrepository.GetObjectById(id)");
+                _logger.LogError("[OrdersController] rental or customer list not found while executing _Rrepository.GetObjectById(id)");
                 return null;
             }
 
             Customer customer = new Customer();
+
+            
 
             foreach (var i in customers)
             {
