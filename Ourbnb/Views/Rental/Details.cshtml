@@ -80,6 +80,7 @@
                     <h3 class="pull-right">Location: @Model.Location</h3>
                     <h5 class="pull-right">Owner: @Model.Owner.FirstName @Model.Owner.LastName</h5>
                     <h5>@Model.Description</h5>
+                    <h5>Available from @Model.FromDate.ToString("d") to @Model.ToDate.ToString("d")</h5>
                     <h5 class="pull-right">Price per/n: @Model.Price.ToString("0.00 NOK")</h5>
                     <h5 class="pull-right">Rating: @Model.Rating</h5>
                     <div style="margin-top:30px;">

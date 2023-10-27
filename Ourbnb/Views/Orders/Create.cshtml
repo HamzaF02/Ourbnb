@@ -15,6 +15,7 @@
         <p>@Model.Customer.FirstName @Model.Customer.LastName</p>
         <input asp-for="Order.CustomerId" type="hidden" value="@Model.Customer.CustomerId">
     </div>
+    <p>Available from @Model.Rental.FromDate.ToString("d") to @Model.Rental.ToDate.ToString("d")</p>
     <div class="form-group">
         <label asp-for="Order.From" asp-item></label>
         <input asp-for="Order.From" class="form-control" min="2023-01-01" value="" type="date" />
