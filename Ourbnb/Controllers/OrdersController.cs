@@ -215,6 +215,7 @@ namespace Ourbnb.Controllers
                 {
                     newOrder = new Order
                     {
+                        OrderId = order.OrderId,
                         Customer = customer,
                         Rental = rental,
                         CustomerId = order.CustomerId,

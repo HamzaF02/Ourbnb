@@ -7,7 +7,7 @@ namespace Ourbnb.Models
     {
         public int RentalId { get; set; }
 
-        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ]{2,30}", ErrorMessage = "Name must be letters or numbers between 2 to 30 charachters")]
+        [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ\s]{2,50}", ErrorMessage = "Name must be letters or numbers between 2 to 50 charachters")]
         public string Name { get; set; } = string.Empty;
         [StringLength(200)]
         public string? Description { get; set; }
@@ -41,7 +41,8 @@ namespace Ourbnb.Models
                     rating += (int)o.Rating;
                 }
             }
-            Rating = rating / Orders.Count;
+            Rating = Math.Round(rating / Orders.Count, 2);
+
         }
     }
 }

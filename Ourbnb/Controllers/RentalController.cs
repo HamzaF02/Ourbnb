@@ -212,6 +212,7 @@ namespace Ourbnb.Controllers
                 {
                     newRental = new Rental
                     {
+                        RentalId = rental.RentalId,
                         Name = rental.Name,
                         Description = rental.Description,
                         FromDate = rental.FromDate,
