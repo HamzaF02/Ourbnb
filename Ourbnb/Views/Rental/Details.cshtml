@@ -48,19 +48,15 @@
                 <h5 class="pull-right">Rating: @Model.Rating</h5>
                 <div style="margin-top:30px;">
 
-                    <button class="btn btn-outline-primary info" style="margin:0px;">
-                        <a asp-controller="Rental" asp-action="Update" asp-route-id="@Model.RentalId">Update Rental</a>
-                    </button>
-                    <button class="btn btn-outline-danger info" style="margin:0px;">
-                        <a asp-controller="Rental" asp-action="Delete" asp-route-id="@Model.RentalId">Delete</a>
-                    </button>
-                    <button class="btn btn-outline-info info" style="margin:0px;">
-                        <a href="/Rental/Table">Back to Table View</a>
-                    </button>
+                 
+                    <a asp-controller="Rental" asp-action="Update" class="btn btn-outline-primary info" style="margin:0px;" asp-route-id="@Model.RentalId">Update Rental</a>
+                   
+                    <a asp-controller="Rental" asp-action="Delete" class="btn btn-outline-danger info" style="margin:0px;" asp-route-id="@Model.RentalId">Delete</a>
 
-                    <button class="btn btn-outline-info info" style="margin:0px;">
-                        <a href="/Rental/Grid">Back to Grid View</a>
-                    </button>
+                    <a class="btn btn-outline-info info" style="margin:0px;" asp-action="Table"> Back to Table View</a>
+
+                    <a class="btn btn-outline-info info" style="margin:0px;" asp-action="Grid">Back to Grid View</a>
+
                 </div>
 
             </div>
@@ -90,17 +86,14 @@
                     <h5 class="pull-right">Price per/n: @Model.Price.ToString("0.00 NOK")</h5>
                     <h5 class="pull-right">Rating: @Model.Rating</h5>
                     <div style="margin-top:30px;">
-                        <button class="btn btn-outline-success info" style="margin:0px;">
-                            <a asp-controller="Orders" asp-action="Create" asp-route-id="@Model.RentalId">Rent out</a>
-                        </button>
-                    
-                        <button class="btn btn-outline-info info" style="margin:0px;">
-                            <a href="/Rental/Table">Back to Table View</a>
-                        </button>
 
-                        <button class="btn btn-outline-info info" style="margin:0px;">
-                            <a href="/Rental/Grid">Back to Grid View</a>
-                        </button>
+                    
+                        <a class="btn btn-outline-success info" style="margin:0px;" asp-controller="Orders" asp-action="Create" asp-route-id="@Model.RentalId">Rent out</a>
+                    
+                        <a class="btn btn-outline-info info" style="margin:0px;" asp-action="Table"> Back to Table View</a>
+                    
+                        <a class="btn btn-outline-info info" style="margin:0px;" asp-action="Grid">Back to Grid View</a>
+                       
                     </div>
 
                 </div>

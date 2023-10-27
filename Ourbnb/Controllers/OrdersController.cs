@@ -155,6 +155,7 @@ namespace Ourbnb.Controllers
                 return NotFound("Something went wrong, go to homepage");
             }
             var CreateOrder = await ViewModel(order.RentalId);
+
             if(CreateOrder != null)
             {
                 CreateOrder.Order = order;
@@ -168,7 +169,10 @@ namespace Ourbnb.Controllers
         public async Task<IActionResult> Update(Order order)
         {
             var CreateOrder = await ViewModel(order.RentalId);
-            CreateOrder.Order = order;
+            if (CreateOrder != null)
+            {
+                CreateOrder.Order = order;
+            }
             try
             {
                 var customer = await _Crepository.getObjectById(order.CustomerId);
@@ -229,7 +233,12 @@ namespace Ourbnb.Controllers
             bool OK = await _repository.Delete(id);
             if (OK)
             {
-                await UpdateRental(order.RentalId);
+                if(order != null)
+                {
+
+                    await UpdateRental(order.RentalId);
+
+                }
                 return RedirectToAction(nameof(ListofOrders));
             }
             _logger.LogError("[OrdersController] Order deletion failed for the order.Rentalid {@order.RentalId}", id);
@@ -239,8 +248,11 @@ namespace Ourbnb.Controllers
         public async Task UpdateRental(int id)
         {
             var rental = await _Rrepository.getObjectById(id);
-            rental.UpdateRating();
-            await _Rrepository.Update(rental);
+            if (rental != null)
+            {
+                rental.UpdateRating();
+                await _Rrepository.Update(rental);
+            }
         }
         public async Task UpdateRental(Rental rental)
         {

@@ -22,7 +22,7 @@ namespace Ourbnb.Controllers
         {
             var identity = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var owners = await _Crepository.GetAll();
-            Customer owner = null;
+            Customer owner = new Customer();
 
             foreach (var i in owners)
             {
@@ -138,7 +138,7 @@ namespace Ourbnb.Controllers
                 return RedirectToAction(nameof(Grid));
             }catch (Exception ex)
             {
-                _logger.LogWarning("[RentalController] Rental creation failed {@rental}", rental);
+                _logger.LogWarning("[RentalController] Rental creation failed {@rental}, error message: {ex}", rental, ex.Message);
                 return View(CreateRental);
             }
         }
