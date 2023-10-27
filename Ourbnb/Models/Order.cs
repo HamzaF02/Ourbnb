@@ -6,10 +6,8 @@ namespace Ourbnb.Models
     {
         public int OrderId { get; set; }
 
-        [DataType(DataType.Date)]
         public DateTime From { get; set; }
 
-        [DataType(DataType.Date)]
         public DateTime To { get; set; }
         public int? Rating { get; set; }
         public int CustomerId { get; set; } = default!;
