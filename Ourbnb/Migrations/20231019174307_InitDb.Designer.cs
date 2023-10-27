@@ -97,7 +97,7 @@ namespace Ourbnb.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Bilder")
+                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

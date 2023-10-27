@@ -18,7 +18,7 @@ namespace Ourbnb.Models
         public string Location { get; set; } = string.Empty;
         [Range(0.01, int.MaxValue, ErrorMessage = "Price must be greater than 0")]
         public int Price { get; set; }
-        public string? Bilder { get; set; }
+        public string? Image { get; set; }
         [Display(Name = "Owners")]
         public int OwnerId { get; set; }
         public string IdentityId { get; set; } = string.Empty;

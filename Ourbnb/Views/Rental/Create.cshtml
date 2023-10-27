@@ -1,4 +1,7 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@{
+    ViewData["Title"] = "Create Rental";
+}
+@using Microsoft.AspNetCore.Identity
 @model CreateRental
 @inject UserManager<IdentityUser> UserManager
 
@@ -43,9 +46,9 @@
         <span asp-validation-for="Rental.Description" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Rental.Bilder"></label>
-        <input asp-for="Rental.Bilder" class="form-control" />
-        <span asp-validation-for="Rental.Bilder" class="text-danger"></span>
+        <label asp-for="Rental.Image"></label>
+        <input asp-for="Rental.Image" class="form-control" />
+        <span asp-validation-for="Rental.Image" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
     <a asp-action="Grid" class="btn btn-secondary">Back to Rentals</a>

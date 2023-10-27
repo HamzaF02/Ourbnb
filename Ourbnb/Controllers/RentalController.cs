@@ -139,7 +139,7 @@ namespace Ourbnb.Controllers
                         Owner = owner,
                         OwnerId = rental.OwnerId,
                         Price = rental.Price,
-                        Bilder = rental.Bilder,
+                        Image = rental.Image,
                         Location = rental.Location,
                         IdentityId = rental.IdentityId,
                         Rating = 0
@@ -200,6 +200,10 @@ namespace Ourbnb.Controllers
             try
             {
                 var owner = await _Crepository.getObjectById(rental.OwnerId);
+                if (owner == null)
+                {
+                    return BadRequest("Owner does not exist!");
+                }
                 int checkDate = DateTime.Compare(rental.FromDate, rental.ToDate);
 
                 Rental newRental = new Rental { };
@@ -215,7 +219,7 @@ namespace Ourbnb.Controllers
                         Owner = owner,
                         OwnerId = rental.OwnerId,
                         Price = rental.Price,
-                        Bilder = rental.Bilder,
+                        Image = rental.Image,
                         Location = rental.Location,
                         IdentityId = rental.IdentityId,
                         Rating = 0

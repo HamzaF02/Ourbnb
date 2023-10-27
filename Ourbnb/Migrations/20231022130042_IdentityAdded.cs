@@ -16,7 +16,7 @@ namespace Ourbnb.Migrations
                 table: "Customers");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Bilder",
+                name: "Image",
                 table: "Rentals",
                 type: "TEXT",
                 nullable: true,
@@ -231,7 +231,7 @@ namespace Ourbnb.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Bilder",
+                name: "Image",
                 table: "Rentals",
                 type: "TEXT",
                 nullable: false,

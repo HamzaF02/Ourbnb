@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Ourbnb.Models.Order>
+﻿@{
+    ViewData["Title"] = "Orders";
+}
+@model IEnumerable<Ourbnb.Models.Order>
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<IdentityUser> UserManager
 

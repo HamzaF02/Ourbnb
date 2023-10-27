@@ -1,4 +1,7 @@
-﻿@model CreateOrder
+﻿@{
+    ViewData["Title"] = "Create Order";
+}
+@model CreateOrder
 
 <h2>Create New Order</h2>
 
@@ -33,5 +36,5 @@
         <span asp-validation-for="Order.Rating" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
-    <a asp-controller="Rental" asp-action="Grid" class="btn btn-secondary">Back to Retnals</a>
+    <a asp-controller="Rental" asp-action="Grid" class="btn btn-secondary">Back to Rentals</a>
 </form>

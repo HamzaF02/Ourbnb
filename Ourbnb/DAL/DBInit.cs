@@ -86,7 +86,7 @@ namespace Ourbnb.DAL
                         OwnerId=1,
                         FromDate=new DateTime(2023, 10, 21),
                         ToDate=new DateTime(2023, 10, 30),
-                        Bilder = "https://hellvikhytte.no/content/uploads/sites/14/2021/08/Fjellerke-3-scaled.jpg",
+                        Image = "https://hellvikhytte.no/content/uploads/sites/14/2021/08/Fjellerke-3-scaled.jpg",
                         Rating=3,
                     },
                     new Rental
@@ -99,7 +99,7 @@ namespace Ourbnb.DAL
                         Location = "Gran",
                         Price = 150,
                          IdentityId = "4",
-                        Bilder = "/images/1.jpeg",
+                        Image = "/images/1.jpeg",
                         OwnerId = 2,
                     },
                     new Rental
@@ -112,7 +112,7 @@ namespace Ourbnb.DAL
                         Location = "Tomter",
                         Price = 150,
                         IdentityId = "4",
-                        Bilder = "/images/modernhouse.jpg",
+                        Image = "/images/modernhouse.jpg",
                         OwnerId = 1
                     },
                     new Rental
@@ -125,7 +125,7 @@ namespace Ourbnb.DAL
                         Location = "Hafjell",
                          IdentityId = "4",
                         Price = 150,
-                        Bilder = "/images/mountain.jpeg",
+                        Image = "/images/mountain.jpeg",
                         OwnerId = 2
                     }
                 };
