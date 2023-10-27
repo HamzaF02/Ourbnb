@@ -209,18 +209,26 @@ namespace Ourbnb.Controllers
                 var Days = order.To - order.From;
                 var total = Days.Days * rental.Price;
 
-                Order newOrder = new Order
+                Order newOrder = new Order { };
+                if (order.From >= rental.FromDate && order.From >= DateTime.Now.Date && order.From < rental.ToDate && order.From < order.To && order.To <= rental.ToDate)
                 {
-                    OrderId = order.OrderId,
-                    Customer = customer,
-                    Rental = order.Rental,
-                    CustomerId = order.CustomerId,
-                    RentalId = order.RentalId,
-                    From = order.From,
-                    To = order.To,
-                    TotalPrice = total,
-                    Rating = order.Rating,
-                };
+                    newOrder = new Order
+                    {
+                        Customer = customer,
+                        Rental = rental,
+                        CustomerId = order.CustomerId,
+                        RentalId = order.RentalId,
+                        From = order.From,
+                        To = order.To,
+                        TotalPrice = total,
+                        Rating = order.Rating,
+                    };
+                }
+                else
+                {
+                    _logger.LogError("dates for order are invalid");
+                    return View(CreateOrder);
+                }
                 bool ok = await _repository.Update(newOrder);
                 if (ok)
                 {
