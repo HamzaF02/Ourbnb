@@ -99,20 +99,33 @@ namespace Ourbnb.Controllers
                     return View(CreateRental);
                 }
 
-                Rental newRental = new Rental
+                int checkDate = DateTime.Compare(rental.FromDate, rental.ToDate);
+
+                Rental newRental = new Rental { };
+
+                if (checkDate < 0 && rental.FromDate >= DateTime.Now.Date)
                 {
-                    Name = rental.Name,
-                    Description = rental.Description,
-                    FromDate = rental.FromDate,
-                    ToDate = rental.ToDate,
-                    Owner = owner,
-                    OwnerId = rental.OwnerId,
-                    Price = rental.Price,
-                    Bilder = rental.Bilder,
-                    Location = rental.Location,
-                    IdentityId = owner.IdentityId,
-                    Rating = 0
-                };
+                    newRental = new Rental
+                    {
+                        Name = rental.Name,
+                        Description = rental.Description,
+                        FromDate = rental.FromDate,
+                        ToDate = rental.ToDate,
+                        Owner = owner,
+                        OwnerId = rental.OwnerId,
+                        Price = rental.Price,
+                        Bilder = rental.Bilder,
+                        Location = rental.Location,
+                        IdentityId = owner.IdentityId,
+                        Rating = 0
+                    };
+                }
+                else
+                {
+                    _logger.LogWarning("Dates are not valid");
+                    return View(CreateRental);
+                }
+                
 
 
                 bool ok = await _repository.Create(newRental);

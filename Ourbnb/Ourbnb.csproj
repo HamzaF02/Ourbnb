@@ -25,8 +25,12 @@
   <ItemGroup>
     <None Remove="DAL\" />
     <None Remove="Views\Orders\" />
+    <None Remove="Logs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logs\" />
   </ItemGroup>
 </Project>
