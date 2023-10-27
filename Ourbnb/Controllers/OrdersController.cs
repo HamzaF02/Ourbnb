@@ -96,7 +96,7 @@ namespace Ourbnb.Controllers
             var CreateOrder = await ViewModel(id);
             if (CreateOrder == null)
             {
-                _logger.LogError("[OrderController] Error making ViewModel while executing _Crepository-GetAll()");
+                _logger.LogError("[OrderController] Error making ViewModel while executing Create()");
                 return NotFound("ViewModel Error, return home");
             }
             return View(CreateOrder);
@@ -105,7 +105,11 @@ namespace Ourbnb.Controllers
         public async Task<IActionResult> Create(Order order)
         {
             var CreateOrder = await ViewModel(order.RentalId);
-            if (CreateOrder == null) { return BadRequest("Something went wrong, return home"); }
+            if (CreateOrder == null)
+            {
+                _logger.LogError("[OrderController] Error making ViewModel while executing Create()");
+                return NotFound("ViewModel Error, return home");
+            }
             CreateOrder.Order = order;
             try
             {
@@ -168,12 +172,15 @@ namespace Ourbnb.Controllers
                 return NotFound("Something went wrong, go to homepage");
             }
             var CreateOrder = await ViewModel(order.RentalId);
-
-            if(CreateOrder != null)
+            if (CreateOrder == null)
             {
-                CreateOrder.Order = order;
-               
+                _logger.LogError("[OrderController] Error making ViewModel while executing Update()");
+                return NotFound("ViewModel Error, return home");
             }
+
+            CreateOrder.Order = order;
+               
+            
 
             return View(CreateOrder);
         }
@@ -182,10 +189,13 @@ namespace Ourbnb.Controllers
         public async Task<IActionResult> Update(Order order)
         {
             var CreateOrder = await ViewModel(order.RentalId);
-            if (CreateOrder != null)
+            if (CreateOrder == null)
             {
-                CreateOrder.Order = order;
+                _logger.LogError("[OrderController] Error making ViewModel while executing Update()");
+                return NotFound("ViewModel Error, return home");
             }
+
+            CreateOrder.Order = order;
             try
             {
                 var customer = await _Crepository.getObjectById(order.CustomerId);
