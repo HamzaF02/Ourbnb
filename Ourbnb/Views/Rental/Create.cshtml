@@ -1,10 +1,13 @@
-﻿@model CreateRental
+﻿@using Microsoft.AspNetCore.Identity
+@model CreateRental
+@inject UserManager<IdentityUser> UserManager
 
 <h2>Create a Rental</h2>
 
 <div asp-validation-summary="All" class="text-danger"></div>
 
 <form asp-action="Create">
+    <input type="hidden" asp-for="Rental.IdentityId" value="@UserManager.GetUserId(User)" />
     <div class="form-group">
         <label>Customer: @Model.Owner.FirstName @Model.Owner.LastName</label>
         <input asp-for="Rental.OwnerId" type="hidden" value="@Model.Owner.CustomerId">
