@@ -121,13 +121,13 @@ namespace Ourbnb.Controllers
                     _logger.LogError("[OrdersController] Failed to find customer or rental with _Crepository.getObjectById() or _Rrepository.getObjectById()");
                     return View(CreateOrder);
                 }
-                var Days = order.To - order.From;
-                var total = Days.Days * rental.Price;
+                    var Days = order.To - order.From;
+                    var total = Days.Days * rental.Price;
 
                 Order newOrder = new Order { };
                 if(order.From > rental.FromDate && order.From > DateTime.Now.Date && order.From < rental.ToDate && order.From < order.To && order.To < rental.ToDate)
                 {
-                newOrder = new Order
+                    newOrder = new Order
                     {
                         Customer = customer,
                         Rental = rental,
