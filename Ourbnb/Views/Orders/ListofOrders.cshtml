@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Ourbnb.Models.Order>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
 
 
     <style>
@@ -37,21 +40,47 @@
                     if (item != null)
                     {
 
-                        <tr>
+                        if(item.Customer.IdentityId == UserManager.GetUserId(User))
+                        {
 
-                            <td>@item.OrderId</td>
-                            <td>@item.From.ToString("d")</td>
-                            <td>@item.To.ToString("d")</td>
-                            <td>@item.Rating</td>
-                            <td>@item.Customer.FirstName @item.Customer.LastName</td>
-                            <td>@item.Rental.Name</td>
-                            <td>@item.TotalPrice</td>
-                            <td>
-                                <button class="btn btn-info">Update</button>
-                                <button class="btn btn-danger">Delete</button>
-                            </td>
 
-                        </tr>
+                            <tr>
+
+                                <td>@item.OrderId</td>
+                                <td>@item.From.ToString("d")</td>
+                                <td>@item.To.ToString("d")</td>
+                                <td>@item.Rating</td>
+                                <td>@item.Customer.FirstName @item.Customer.LastName</td>
+                                <td>@item.Rental.Name</td>
+                                <td>@item.TotalPrice</td>
+                                <td>
+                                    <button asp-controller="Orders" asp-action="Update" class="btn btn-info">Update</button>
+                                    <button asp-controller="Orders" asp-action="Delete" class="btn btn-danger">Delete</button>
+                                </td>
+
+                            </tr>
+                        }
+                        else
+                        {
+
+                            <tr>
+
+                                <td>@item.OrderId</td>
+                                <td>@item.From.ToString("d")</td>
+                                <td>@item.To.ToString("d")</td>
+                                <td>@item.Rating</td>
+                                <td>@item.Customer.FirstName @item.Customer.LastName</td>
+                                <td>@item.Rental.Name</td>
+                                <td>@item.TotalPrice</td>
+                                <td>
+                                 
+                                </td>
+
+                            </tr>
+                            
+                        }
+
+                      
                     }
                 }
             </tbody>
