@@ -7,7 +7,6 @@
 
 <h2>Create a Rental</h2>
 
-<div asp-validation-summary="All" class="text-danger"></div>
 
 <form asp-action="Create">
     <input type="hidden" asp-for="Rental.IdentityId" value="@UserManager.GetUserId(User)" />
