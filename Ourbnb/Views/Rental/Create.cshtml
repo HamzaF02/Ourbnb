@@ -6,6 +6,10 @@
 
 <form asp-action="Create">
     <div class="form-group">
+        <label>Customer: @Model.Owner.FirstName @Model.Owner.LastName</label>
+        <input asp-for="Rental.OwnerId" type="hidden" value="@Model.Owner.CustomerId">
+    </div>
+    <div class="form-group">
         <label asp-for="Rental.Name"></label><span class="text-danger">*</span>
         <input asp-for="Rental.Name" class="form-control" />
         <span asp-validation-for="Rental.Name" class="text-danger"></span>
@@ -14,13 +18,6 @@
         <label asp-for="Rental.Location"></label><span class="text-danger">*</span>
         <input asp-for="Rental.Location" class="form-control" />
         <span asp-validation-for="Rental.Location" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Rental.OwnerId"></label><span class="text-danger">*</span>
-        <select asp-for="Rental.OwnerId" asp-items="Model.OwnersList" class="form-control">
-            <option value="">Choose an Owner</option>
-        </select>
-        <span asp-validation-for="Rental.OwnerId" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Rental.Price"></label><span class="text-danger">*</span>

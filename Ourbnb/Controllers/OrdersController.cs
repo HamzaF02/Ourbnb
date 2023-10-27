@@ -27,8 +27,9 @@ namespace Ourbnb.Controllers
             _Crepository = crepository;
             _Rrepository = Rrepository;
         }
-        public async Task<CreateOrder?> ViewModel(int id, string identity)
+        public async Task<CreateOrder?> ViewModel(int id)
         {
+            var identity = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customers = await _Crepository.GetAll();
             var rental = await _Rrepository.getObjectById(id);
             if (rental == null)
@@ -86,8 +87,7 @@ namespace Ourbnb.Controllers
         [Authorize]
         public async Task<IActionResult> Create(int id)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var CreateOrder = await ViewModel(id, userId);
+            var CreateOrder = await ViewModel(id);
             if (CreateOrder == null)
             {
                 _logger.LogError("[OrderController] Error making ViewModel while executing _Crepository-GetAll()");
@@ -96,12 +96,9 @@ namespace Ourbnb.Controllers
             return View(CreateOrder);
         }
         [HttpPost]
-
-
         public async Task<IActionResult> Create(Order order)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var CreateOrder = await ViewModel(order.RentalId, userId);
+            var CreateOrder = await ViewModel(order.RentalId);
             if (CreateOrder == null) { return BadRequest("Something went wrong, return home"); }
             CreateOrder.Order = order;
             try
@@ -154,19 +151,15 @@ namespace Ourbnb.Controllers
             {
                 return NotFound("Something went wrong, go to homepage");
             }
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var CreateOrder = await ViewModel(order.RentalId, userId);
+            var CreateOrder = await ViewModel(order.RentalId);
             CreateOrder.Order = order;
             return View(CreateOrder);
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> Update(Order order)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var CreateOrder = await ViewModel(order.RentalId, userId);
+            var CreateOrder = await ViewModel(order.RentalId);
             CreateOrder.Order = order;
             try
             {

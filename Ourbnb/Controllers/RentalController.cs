@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Ourbnb.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Configuration;
+using Castle.Core.Resource;
+using System.Security.Principal;
+using System.Security.Claims;
 
 namespace Ourbnb.Controllers
 {
@@ -17,10 +20,21 @@ namespace Ourbnb.Controllers
 
         public async Task<CreateRental> ViewModel()
         {
+            var identity = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var owners = await _Crepository.GetAll();
+            Customer owner = null;
+
+            foreach (var i in owners)
+            {
+                if (i.IdentityId == identity)
+                {
+                    owner = i;
+                    break;
+                }
+            }
+
             var CreateRental = new CreateRental
             {
-
                 OwnersList = owners.Select(owner => new SelectListItem
                 {
 
@@ -28,7 +42,8 @@ namespace Ourbnb.Controllers
                     Text = owner.CustomerId.ToString() + " : " + owner.FirstName + " " + owner.LastName
                 }).ToList(),
 
-                Rental = new Rental()
+                Rental = new Rental(),
+                Owner = owner
             };
 
             return CreateRental;
