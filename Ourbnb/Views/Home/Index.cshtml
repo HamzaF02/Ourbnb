@@ -8,33 +8,123 @@
     <title>@ViewData["Title"]</title>
     <style>
 
-        body {
-            background-image: url("/images/Villa.jpg");
-            object-position: 50% 75%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        *{
+            padding:0;
+            margin:0;
+            box-sizing:border-box;
+            position:relative;
+            z-index:1;
+
         }
 
         .Front {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
-            margin-top: 180px;
-            margin-bottom: 300px; 
+            margin-top: 300px;
             width: 50%;
             font-size: 20px;
+            position: relative;
+            z-index: 3;
+        }
 
+        #divBack {
+            background-image: url("/images/Villa.jpg");
+            object-position: 100% 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 700px;
+            Background-position: Center;
+            background-color: black;
+            border-radius: 20px;
+            box-shadow: 0 30px 40px rgba(0,0,0,.1);
+            position:relative;
+            margin-top:-450px;
+        }
 
+     
+
+        #carouselImages{
+            margin-top:20px;
+            border-radius:20px;
+        }
+
+        .carpic {
+            
+            background-size: cover;
+            height:500px;
+            border-radius:20px;
+           
+
+        }
+
+        #txt {
+            font-size: 20px;
+            margin-top:20px;
+           line-height:35px;
+        }
+
+        .txtbox {
+            background-image: linear-gradient(127deg,white 10%, #5291f7);
+            padding: 30px;
+            border-radius: 20px;
+            height: 500px;
+            margin-top:20px;
+           
         }
          
     </style>
 </head>
 <body>
 
+
+
     <div class="container text-center Front">
         <h1 class="display-4">Ourbnb</h1>
-        <p>Stay all around the world, and explore amazing places with us.</p>
+        <p >Stay all around the world, and explore amazing places with us.</p>
+    </div>
+    <div id="divBack">
+
+
+    </div>
+
+
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
+
+
+            <div class="col txtbox">
+                <h4>Hello There Nice to meet you, Welcome to Ourbnb!</h4>
+                <p id="txt">Discover the ultimate getaway on our enchanting rental site, where breathtaking views and endless exploration await.
+                Nestled amidst nature's beauty, our properties offer a serene escape from the hustle and bustle of everyday life.
+                Whether you seek the tranquil majesty of mountain vistas, the calming embrace of a lakeside retreat,
+                or the coastal allure of oceanfront hideaways, our rentals provide a front-row seat to nature's wonders. </p>
+            </div>
+
+            <div id="carouselImages" class="carousel slide col" data-bs-ride="true" style="margin-bottom:100px;">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselImages" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <img src="/images/1.jpeg" class="d-block w-100 carpic" alt="house1">
+                    </div>
+                    <div class="carousel-item active">
+                        <img src="/images/LeidHus.jpg" class="d-block w-100 carpic" alt="house2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/images/mountain.jpeg" class="d-block w-100 carpic" alt="house3">
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
     </div>
 
 </body>
