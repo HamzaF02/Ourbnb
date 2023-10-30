@@ -25,7 +25,7 @@ namespace Ourbnb.DAL
                 return true;
             }catch (Exception ex)
             {
-                _logger.LogError("[OrderRepository] item creation failed for order {@order}, error message: {ex}", order, ex.Message);
+                _logger.LogError("[OrderRepository] order creation failed for order {@order}, error message: {ex}", order, ex.Message);
                 return false;
             }
         }

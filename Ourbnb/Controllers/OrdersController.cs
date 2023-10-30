@@ -59,14 +59,6 @@ namespace Ourbnb.Controllers
 
             var CreateOrder = new CreateOrder
             {
-
-                CustomerList = customers.Select(customer => new SelectListItem
-                {
-
-                    Value = customer.CustomerId.ToString(),
-                    Text = customer.CustomerId.ToString() + " : " + customer.FirstName + " " + customer.LastName
-                }).ToList(),
-
                 Order = new Order(),
                 Rental = rental,
                 Customer = customer,

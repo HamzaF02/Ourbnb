@@ -24,7 +24,7 @@ namespace Ourbnb.DAL
                         LastName="Ylli",
                         Address="Pilestreden 32",
                         Phone=91824521,
-                        IdentityId = "4",
+                        IdentityId = "None",
                         Email="Hamza@gmail.com"
 
 
@@ -36,7 +36,7 @@ namespace Ourbnb.DAL
                         LastName="din",
                         Address="Pilestredet 35",
                         Phone=47782356,
-                        IdentityId = "6",
+                        IdentityId = "None",
                         Email="Mahdi123@gmail.com"
 
 
@@ -48,7 +48,7 @@ namespace Ourbnb.DAL
                         LastName="Yusuf",
                         Address="Pilestredet 35",
                         Phone=47782356,
-                        IdentityId = "5",
+                        IdentityId = "None",
                         Email="Mahdi123@gmail.com"
 
 
@@ -59,7 +59,7 @@ namespace Ourbnb.DAL
                         LastName="din",
                         Address="Pilestredet 35",
                         Phone=47782356,
-                        IdentityId = "6",
+                        IdentityId = "None",
                         Email="Mahdi123@gmail.com"
 
 
@@ -82,36 +82,36 @@ namespace Ourbnb.DAL
                         Location="Nordkapp",
                         Description="Fin moderne hytte med mye plass",
                         Price=2500,
-                         IdentityId = "4",
+                         IdentityId = "None",
                         OwnerId=1,
-                        FromDate=new DateTime(2023, 10, 21),
-                        ToDate=new DateTime(2023, 10, 30),
-                        Image = "https://hellvikhytte.no/content/uploads/sites/14/2021/08/Fjellerke-3-scaled.jpg",
+                        FromDate=new DateTime(2023, 10, 27),
+                        ToDate=new DateTime(2023, 11, 30),
+                        Image = "hytteNordkapp",
                         Rating=3,
                     },
                     new Rental
                     {
                         Name = "House by the waterfalls",
                         Description = "A nice place to be with friends and family to enjoy a calm and nice view",
-                        FromDate = new DateTime(2015, 10, 10),
-                        ToDate = new DateTime(2015, 10, 20),
-                        Rating = 3.5,
+                        FromDate = new DateTime(2023, 10, 10),
+                        ToDate = new DateTime(2024, 10, 10),
+                        Rating = 3,
                         Location = "Gran",
                         Price = 150,
-                         IdentityId = "4",
-                        Image = "/images/1.jpeg",
+                         IdentityId = "None",
+                        Image = "/images/HouseWater.jpeg",
                         OwnerId = 2,
                     },
                     new Rental
                     {
                         Name = "House by the forrest",
                         Description = "A nice place to be with friends and family to enjoy a calm and nice view",
-                        FromDate = new DateTime(2016, 04, 10),
-                        ToDate = new DateTime(2016, 04, 20),
+                        FromDate = new DateTime(2023, 04, 10),
+                        ToDate = new DateTime(2023, 04, 20),
                         Rating = 3.9,
                         Location = "Tomter",
                         Price = 150,
-                        IdentityId = "4",
+                        IdentityId = "None",
                         Image = "/images/modernhouse.jpg",
                         OwnerId = 1
                     },
@@ -119,11 +119,11 @@ namespace Ourbnb.DAL
                     {
                         Name = "House by the mountains",
                         Description = "A nice place to be with friends and family to enjoy a calm and nice view",
-                        FromDate = new DateTime(2019, 08, 10),
-                        ToDate = new DateTime(2019, 08, 10),
+                        FromDate = new DateTime(2023, 08, 10),
+                        ToDate = new DateTime(2024, 08, 10),
                         Rating = 4.1,
                         Location = "Hafjell",
-                         IdentityId = "4",
+                        IdentityId = "None",
                         Price = 150,
                         Image = "/images/mountain.jpeg",
                         OwnerId = 2

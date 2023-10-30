@@ -38,15 +38,13 @@ namespace Ourbnb.Controllers
                 }
             }
 
+            if(owner == default(Customer))
+            {
+                return null;
+            }
+
             var CreateRental = new CreateRental
             {
-                OwnersList = owners.Select(owner => new SelectListItem
-                {
-
-                    Value = owner.CustomerId.ToString(),
-                    Text = owner.CustomerId.ToString() + " : " + owner.FirstName + " " + owner.LastName
-                }).ToList(),
-
                 Rental = new Rental(),
                 Owner = owner
             };
@@ -104,6 +102,11 @@ namespace Ourbnb.Controllers
         public async Task<IActionResult> Create()
         {
             var CreateRental = await ViewModel();
+            if(CreateRental == null)
+            {
+                _logger.LogError("[RentalController] Error making ViewModel while executing Create()");
+                return NotFound("ViewModel Error, return home");
+            }
             return View(CreateRental);
         }
         [HttpPost]

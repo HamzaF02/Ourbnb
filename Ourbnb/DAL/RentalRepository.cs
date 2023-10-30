@@ -7,10 +7,13 @@ namespace Ourbnb.DAL
 	public class RentalRepository : IRepository<Rental>
 	{
 		private readonly RentalDbContext _db;
-		public RentalRepository(RentalDbContext db)
-		{
-			_db = db;
-		}
+        private readonly ILogger<RentalRepository> _logger;
+
+        public RentalRepository(RentalDbContext db, ILogger<RentalRepository> logger)
+        {
+            _db = db;
+            _logger = logger;
+        }
 
         public async Task<bool> Create(Rental rental)
         {
@@ -20,31 +23,57 @@ namespace Ourbnb.DAL
                 return true;
             }catch (Exception ex)
             {
+                _logger.LogError("[RentalRepository] rental creation failed for rental {@rental}, error message: {ex}", rental, ex.Message);
                 return false;
             }
         }
 
         public async Task<bool> Delete(int id)
         {
-            var rental = await _db.Rentals.FindAsync(id);
-            if (rental == null)
+            try
             {
+                var rental = await _db.Rentals.FindAsync(id);
+                if (rental == null)
+                {
+                    _logger.LogError("[RentalRepository] rental not found for the RentalId {RentalId:0000}", id);
+
+                    return false;
+                }
+
+                _db.Rentals.Remove(rental);
+                await _db.SaveChangesAsync();
+                return true;
+            }catch(Exception ex)
+            {
+                _logger.LogError("[RentalRepository] rental deletion failed for RentalId {RentalId:0000}, error message: {ex}", id, ex.Message);
                 return false;
             }
-
-            _db.Rentals.Remove(rental);
-            await _db.SaveChangesAsync();
-            return true;
         }
 
         public async Task<Rental?> getObjectById(int id)
         {
-            return await _db.Rentals.FindAsync(id);
+            try
+            {
+                return await _db.Rentals.FindAsync(id);
+            }catch(Exception ex)
+            {
+                _logger.LogError("[RentalRepository] rental FindAsync(id) failed when GetObjectById for RentalId {RentalId:0000}, error message: {ex}", id, ex.Message);
+                return null;
+            }
+            
         }
 
         public async Task<IEnumerable<Rental>?> GetAll()
         {
-            return await _db.Rentals.ToListAsync();
+            try
+            {
+                return await _db.Rentals.ToListAsync();
+            }catch(Exception ex)
+            {
+                _logger.LogError("[RentalRepository] order ToListAsync() failed when GetAll(), error message: {ex}", ex.Message);
+                return null;
+            }
+            
         }
 
         public async Task<bool> Update(Rental rental)
@@ -57,6 +86,7 @@ namespace Ourbnb.DAL
             }
             catch (Exception ex)
             {
+                _logger.LogError("[RentalRepository] rental FindAync(id) failed when updating the RentalId {RentalId:0000}, error message: {ex}", rental, ex.Message);
                 return false;
             }
         }
