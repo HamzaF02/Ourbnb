@@ -51,7 +51,7 @@ namespace Ourbnb.DAL
             }
         }
 
-        public async Task<IEnumerable<Order>> GetAll()
+        public async Task<IEnumerable<Order>?> GetAll()
         {
             try
             {
