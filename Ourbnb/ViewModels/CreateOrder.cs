@@ -8,7 +8,6 @@ namespace Ourbnb.ViewModels
     public class CreateOrder
     {
         public Order Order { get; set; } = default!;
-        public List<SelectListItem> CustomerList { get; set; } = default!;
         public Rental Rental { get; set; } = default!;
         public Customer Customer { get; set; } = default!;
     }
