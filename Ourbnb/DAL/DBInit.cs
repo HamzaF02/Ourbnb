@@ -14,8 +14,10 @@ namespace Ourbnb.DAL
             context.Database.EnsureCreated();
 
 
+            //checks if there is not any customers
             if (!context.Customers.Any())
             {
+                //adds customers to the database
                 var customer = new List<Customer>
                 {
                     new Customer
@@ -25,57 +27,36 @@ namespace Ourbnb.DAL
                         Address="Pilestreden 32",
                         Phone=91824521,
                         IdentityId = "None",
-                        Email="Hamza@gmail.com"
+                        Email="Harki@gmail.com"
 
 
                     },
                    
-                       new Customer
-                    {
-                        FirstName="moren",
-                        LastName="din",
-                        Address="Pilestredet 35",
-                        Phone=47782356,
-                        IdentityId = "None",
-                        Email="Mahdi123@gmail.com"
-
-
-                    },
+                       
 
                     new Customer
                     {
                         FirstName="Mahdi",
-                        LastName="Yusuf",
+                        LastName="Ibbi",
                         Address="Pilestredet 35",
                         Phone=47782356,
                         IdentityId = "None",
-                        Email="Mahdi123@gmail.com"
-
-
+                        Email="Oslo@gmail.com"
                     },
-                       new Customer
-                    {
-                        FirstName="moren",
-                        LastName="din",
-                        Address="Pilestredet 35",
-                        Phone=47782356,
-                        IdentityId = "None",
-                        Email="Mahdi123@gmail.com"
-
-
-                    }
 
 
                 };
+                //saves the customers in the database
                 context.AddRange(customer);
                 context.SaveChanges();
             }
 
-
+            //checks if there are not any rentals
             if (!context.Rentals.Any())
             {
                 var rentals = new List<Rental>
                 {
+                    //create new rentals
                     new Rental
                     {
                         Name="Hytte i Nordkapp",
@@ -129,12 +110,15 @@ namespace Ourbnb.DAL
                         OwnerId = 2
                     }
                 };
+                //saves the rentals to the database
                 context.AddRange(rentals);
                 context.SaveChanges();
             }
 
+            //checks if the database contains any orders
             if (!context.Orders.Any())
             {
+                //creates a new order
                 var orders = new List<Order>
                 {
                     new Order
@@ -146,6 +130,7 @@ namespace Ourbnb.DAL
                         Rating = 3
                     }
                 };
+                //saves the order in the database
                 context.AddRange(orders);
                 context.SaveChanges();
             }
