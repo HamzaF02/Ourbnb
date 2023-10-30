@@ -7,10 +7,13 @@ namespace Ourbnb.DAL
 	public class RentalRepository : IRepository<Rental>
 	{
 		private readonly RentalDbContext _db;
-		public RentalRepository(RentalDbContext db)
-		{
-			_db = db;
-		}
+        private readonly ILogger<RentalRepository> _logger;
+
+        public RentalRepository(RentalDbContext db, ILogger<RentalRepository> logger)
+        {
+            _db = db;
+            _logger = logger;
+        }
 
         public async Task<bool> Create(Rental rental)
         {
