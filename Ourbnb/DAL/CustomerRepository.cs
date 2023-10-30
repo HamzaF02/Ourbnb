@@ -7,9 +7,12 @@ namespace Ourbnb.DAL
     public class CustomerRepository : IRepository<Customer>
     {
         private readonly RentalDbContext _db;
-        public CustomerRepository(RentalDbContext db)
+        private readonly ILogger<CustomerRepository> _logger;
+
+        public CustomerRepository(RentalDbContext db, ILogger<CustomerRepository> logger)
         {
             _db = db;
+            _logger = logger;
         }
 
         public async Task<bool> Create(Customer customer)
@@ -22,43 +25,70 @@ namespace Ourbnb.DAL
             }
             catch (Exception ex)
             {
+                _logger.LogError("[CustomerRepository] customer creation failed for customer {@customer}, error message: {ex}", customer, ex.Message);
                 return false;
             }
         }
 
         public async Task<bool> Delete(int id)
         {
-            var customer = await _db.Customers.FindAsync(id);
-            if (customer == null)
+            try
             {
+                var customer = await _db.Customers.FindAsync(id);
+                if (customer == null)
+                {
+                    _logger.LogError("[CustomerRepository] customer not found for the CustomerId {CustomerId:0000}", id);
+                    return false;
+                }
+
+                _db.Customers.Remove(customer);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("[CustomerRepository] customer deletion failed for CustomerId {CusotmerId:0000}, error message: {ex}", id, ex.Message);
                 return false;
             }
-
-            _db.Customers.Remove(customer);
-            await _db.SaveChangesAsync();
-            return true;
         }
 
         public async Task<IEnumerable<Customer>?> GetAll()
         {
-            return await _db.Customers.ToListAsync();
+            try
+            {
+                return await _db.Customers.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("[CustomerRepository] customer ToListAsync() failed when GetAll(), error message: {ex}", ex.Message);
+                return null;
+            }
         }
 
         public async Task<Customer?> getObjectById(int id)
         {
-            return await _db.Customers.FindAsync(id);
+            try
+            {
+                return await _db.Customers.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("[CustomerRepository] customer FindAsync(id) failed when GetObjectById() for CustomerId {CustomerId:0000}, error message: {ex}", id, ex.Message);
+                return null;
+            }
         }
 
         public async Task<bool> Update(Customer customer)
         {
             try
             {
-                _db.Customers.Add(customer);
+                _db.Customers.Update(customer);
                 await _db.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
             {
+                _logger.LogError("[CustomerRepository] customer FindAync(id) failed when updating the CustomerId {CustomerId:0000}, error message: {ex}", customer, ex.Message);
                 return false;
             }
         }

@@ -24,7 +24,7 @@ namespace Ourbnb.DAL
                         LastName="Ylli",
                         Address="Pilestreden 32",
                         Phone=91824521,
-                        IdentityId = "4",
+                        IdentityId = "None",
                         Email="Hamza@gmail.com"
 
 
@@ -36,7 +36,7 @@ namespace Ourbnb.DAL
                         LastName="din",
                         Address="Pilestredet 35",
                         Phone=47782356,
-                        IdentityId = "6",
+                        IdentityId = "None",
                         Email="Mahdi123@gmail.com"
 
 
@@ -48,7 +48,7 @@ namespace Ourbnb.DAL
                         LastName="Yusuf",
                         Address="Pilestredet 35",
                         Phone=47782356,
-                        IdentityId = "5",
+                        IdentityId = "None",
                         Email="Mahdi123@gmail.com"
 
 
@@ -59,7 +59,7 @@ namespace Ourbnb.DAL
                         LastName="din",
                         Address="Pilestredet 35",
                         Phone=47782356,
-                        IdentityId = "6",
+                        IdentityId = "None",
                         Email="Mahdi123@gmail.com"
 
 
@@ -82,7 +82,7 @@ namespace Ourbnb.DAL
                         Location="Nordkapp",
                         Description="Fin moderne hytte med mye plass",
                         Price=2500,
-                         IdentityId = "4",
+                         IdentityId = "None",
                         OwnerId=1,
                         FromDate=new DateTime(2023, 10, 21),
                         ToDate=new DateTime(2023, 10, 30),
@@ -95,10 +95,10 @@ namespace Ourbnb.DAL
                         Description = "A nice place to be with friends and family to enjoy a calm and nice view",
                         FromDate = new DateTime(2015, 10, 10),
                         ToDate = new DateTime(2015, 10, 20),
-                        Rating = 3.5,
+                        Rating = 3,
                         Location = "Gran",
                         Price = 150,
-                         IdentityId = "4",
+                         IdentityId = "None",
                         Image = "/images/1.jpeg",
                         OwnerId = 2,
                     },
@@ -111,7 +111,7 @@ namespace Ourbnb.DAL
                         Rating = 3.9,
                         Location = "Tomter",
                         Price = 150,
-                        IdentityId = "4",
+                        IdentityId = "None",
                         Image = "/images/modernhouse.jpg",
                         OwnerId = 1
                     },
@@ -123,7 +123,7 @@ namespace Ourbnb.DAL
                         ToDate = new DateTime(2019, 08, 10),
                         Rating = 4.1,
                         Location = "Hafjell",
-                         IdentityId = "4",
+                        IdentityId = "None",
                         Price = 150,
                         Image = "/images/mountain.jpeg",
                         OwnerId = 2
