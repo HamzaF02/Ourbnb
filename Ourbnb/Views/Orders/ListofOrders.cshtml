@@ -37,11 +37,15 @@
                 </tr>
             </thead>
             <tbody>
+
+                <!-- for loop for each order -->
+
                 @foreach (var item in Model)
                 {
+
                     if (item != null)
                     {
-
+                        <!-- if the order is connected to the user then update and delete button is displayed, if not then user will not be able to edit order -->
                         if (item.Customer.IdentityId == UserManager.GetUserId(User))
                         {
 
