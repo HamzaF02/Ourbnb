@@ -47,7 +47,6 @@ namespace Ourbnb.Controllers
 
             //Finds Customer that matches to Identity
             Customer customer = new Customer();
-
             foreach (var i in customers)
             {
                 if (i.IdentityId == identity) { 
@@ -56,8 +55,8 @@ namespace Ourbnb.Controllers
                 }
             }
 
-            //checks if it was not found and logs incase of true
-            if (customer == null)
+            //Checks if it was not found and logs incase of true
+            if (customer == default(Customer))
             {
                 _logger.LogError("[OrdersController] Customer matching identityId in list not found while executing _Rrepository.GetObjectById(id)");
                 return null;
@@ -215,6 +214,7 @@ namespace Ourbnb.Controllers
             return View(CreateOrder);
         }
         
+        //Update with input
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Update(Order order)
@@ -290,6 +290,7 @@ namespace Ourbnb.Controllers
             //Logging incase of errors
         }
 
+        //Get page of deletion
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Delete(int id)
@@ -304,6 +305,7 @@ namespace Ourbnb.Controllers
             return View(order);
         }
 
+        //Confirm deletion of order
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -328,6 +330,7 @@ namespace Ourbnb.Controllers
             return BadRequest("Rental deletion failed, return to homepage");
         }
 
+        //Update Rentals Rating
         public async Task UpdateRental(int id)
         {
             //Finds rental from id
@@ -341,6 +344,7 @@ namespace Ourbnb.Controllers
                 
             }
         }
+        //Update Rentals Rating
         public async Task UpdateRental(Rental rental)
         {
             //Update its rating through its own function

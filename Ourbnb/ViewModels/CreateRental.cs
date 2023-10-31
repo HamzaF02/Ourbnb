@@ -9,5 +9,7 @@ namespace Ourbnb.ViewModels
     {
         public Rental Rental { get; set; } = default!;
         public Customer Owner { get; set; } = default!;
+        public string? message { get; set; }
+
     }
 }

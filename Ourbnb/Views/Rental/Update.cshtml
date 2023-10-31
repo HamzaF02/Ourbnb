@@ -5,6 +5,12 @@
 
 <h2>Update Rental</h2>
 
+@if (@Model.message != null)
+{
+    <p class="text-danger">@Model.message</p>
+}
+
+
 <form asp-action="Update">
     <input type="hidden" asp-for="Rental.RentalId" />
     <input type="hidden" asp-for="Rental.Orders" />

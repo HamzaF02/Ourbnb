@@ -14,21 +14,37 @@ namespace Ourbnb.Controllers
 {
     public class RentalController : Controller
     {
+        //Repositories for Order, Rental and Customer
         private readonly IRepository<Rental> _repository;
         private readonly IRepository<Customer> _Crepository;
+
+        //Serilogger
         private readonly ILogger<RentalController> _logger;
 
+        //Constructor for class and defines variables
+        public RentalController(IRepository<Rental> rentalRepository, IRepository<Customer> Crepository, ILogger<RentalController> logger)
+        {
+            _repository = rentalRepository;
+            _Crepository = Crepository;
+            _logger = logger;
+        }
+
+        //Creates CreateRental ViewModel
         public async Task<CreateRental?> ViewModel()
         {
+            //Gets the Identity of current logged inn user and all possible owners
             var identity = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var owners = await _Crepository.GetAll();
-            if (owners == null)
+
+            //Checks for null values
+            if (owners == null || identity == null)
             {
-                _logger.LogError("[OrdersController] owners list not found while executing _Rrepository.GetObjectById(id)");
+                _logger.LogError("[RentalController] Owners list or userId not found while executing _repository.GetObjectById(id)");
                 return null;
             }
-            Customer owner = new Customer();
 
+            //Finds owner that matches to Identity
+            Customer owner = new Customer();
             foreach (var i in owners)
             {
                 if (i.IdentityId == identity)
@@ -38,27 +54,25 @@ namespace Ourbnb.Controllers
                 }
             }
 
-            if(owner == default(Customer))
+            //Checks if it was not found and logs incase of true
+            if (owner == default(Customer))
             {
+                _logger.LogError("[RentalController] Owner matching identityId in list not found while executing _repository.GetObjectById(id)");
                 return null;
             }
 
+            //Creates ViewModel
             var CreateRental = new CreateRental
             {
                 Rental = new Rental(),
                 Owner = owner
             };
 
+            //Returns ViewModel
             return CreateRental;
         }
 
-        public RentalController(IRepository<Rental> rentalRepository, IRepository<Customer> Crepository, ILogger<RentalController> logger)
-        {
-            _repository = rentalRepository;
-            _Crepository = Crepository;
-            _logger = logger;
-        }
-
+        //Returns Table view with all Orders
         public async Task<IActionResult> Table()
         {
             var rentals =  await _repository.GetAll();
@@ -70,6 +84,8 @@ namespace Ourbnb.Controllers
             ViewBag.CurrentViewName = "Table";
             return View(rentals);
         }
+
+        //Returns Grid view with all Orders
 
         public async Task<IActionResult> Grid()
         {
@@ -124,7 +140,7 @@ namespace Ourbnb.Controllers
                 var owner = await _Crepository.getObjectById(rental.OwnerId);
                 if(owner == null)
                 {
-                    return View(CreateRental);
+                    return BadRequest("Owner not Found");
                 }
 
                 int checkDate = DateTime.Compare(rental.FromDate, rental.ToDate);
@@ -151,6 +167,7 @@ namespace Ourbnb.Controllers
                 else
                 {
                     _logger.LogWarning("Dates are not valid");
+                    CreateRental.message = "Dates are not valid";
                     return View(CreateRental);
                 }
                 
@@ -159,6 +176,7 @@ namespace Ourbnb.Controllers
                 bool ok = await _repository.Create(newRental);
                 if(!ok) {
                     _logger.LogWarning("[RentalController] Rental creation failed {@rental}", rental);
+                    CreateRental.message = "Creation failed";
                     return View(CreateRental);
                 }
                 return RedirectToAction(nameof(Grid));
@@ -232,12 +250,14 @@ namespace Ourbnb.Controllers
                 else
                 {
                     _logger.LogWarning("Dates are not valid");
+                    CreateRental.message = "Dates are not valid";
                     return View(CreateRental);
                 }
                 bool ok = await _repository.Update(rental);
                 if (!ok)
                 {
                     _logger.LogWarning("[RentalController] Rental update failed {@rental}", rental);
+                    CreateRental.message = "Update Failed";
                     return View(CreateRental);
                 }
                 return RedirectToAction(nameof(Grid));

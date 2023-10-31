@@ -4,6 +4,11 @@
 @model CreateOrder
 
 <h2>Create New Order</h2>
+@if (@Model.message != null)
+{
+    <p class="text-danger">@Model.message</p>
+}
+
 
 <form asp-action="Create">
     <div class="form-group">
