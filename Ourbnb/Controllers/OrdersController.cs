@@ -120,7 +120,7 @@ namespace Ourbnb.Controllers
                 _logger.LogError("[OrderController] Error making ViewModel while executing Create()");
                 return NotFound("ViewModel Error, return home");
             }
-            //Creates viewmodel and checks it
+            //Adds current order to viewmodel
             CreateOrder.Order = order;
 
             //try catch for creation incase of exception
@@ -145,7 +145,7 @@ namespace Ourbnb.Controllers
                 Order newOrder = new Order { };
                 if(order.From >= rental.FromDate && order.From >= DateTime.Now.Date && order.From < rental.ToDate && order.From < order.To && order.To <= rental.ToDate)
                 {
-                    //Creation of Order
+                    //Creation of Order object
                     newOrder = new Order
                     {
                         Customer = customer,
@@ -160,7 +160,9 @@ namespace Ourbnb.Controllers
                 }
                 else
                 {
-                    _logger.LogError("dates for order are invalid");
+                    //logs and return error message to view
+                    _logger.LogError("Dates for order are invalid");
+                    CreateOrder.message = "Dates for order are invalid";
                     return View(CreateOrder);
                 }
 
@@ -181,8 +183,9 @@ namespace Ourbnb.Controllers
             }
             catch (Exception ex)
             {
-                //In case of exception it logs error and goes back to input field
+                //In case of exception it logs error and goes back to input field with message
                 _logger.LogWarning("[OrdersController] newOrder creation failed {@CreateOrder}, error message: {ex}", CreateOrder, ex.Message);
+                CreateOrder.message = "Creation failed";
                 return View(CreateOrder);
             }
         }
@@ -219,7 +222,7 @@ namespace Ourbnb.Controllers
         [Authorize]
         public async Task<IActionResult> Update(Order order)
         {
-            //Creates viewModel incase something goes wrong and checks it
+            //Creates ViewModel incase something goes wrong and checks it
             var CreateOrder = await ViewModel(order.RentalId);
             if (CreateOrder == null)
             {
@@ -227,7 +230,7 @@ namespace Ourbnb.Controllers
                 return NotFound("ViewModel Error, return home");
             }
 
-            //Creates viewmodel and checks it
+            //Adds current order to viewmodel
             CreateOrder.Order = order;
 
             //try catch for creation incase of exception
@@ -268,7 +271,9 @@ namespace Ourbnb.Controllers
                 }
                 else
                 {
+                    //Logs error and returns view with message
                     _logger.LogError("dates for order are invalid");
+                    CreateOrder.message = "Dates for order are invalid";
                     return View(CreateOrder);
                 }
                 //Repository updates and checks it
@@ -280,14 +285,16 @@ namespace Ourbnb.Controllers
                     return RedirectToAction(nameof(ListofOrders));
                 }
                 _logger.LogError("[OrdersController] Order failed to update {@order}", order);
+                CreateOrder.message = "Order update failed";
                 return View(CreateOrder);
             }
             catch (Exception ex)
             {
+                //In case of exception it logs error and returns view with message
                 _logger.LogError("[OrdersController] Order failed to update {@order}, error message: {ex} ", order, ex.Message);
+                CreateOrder.message = "Order update failed";
                 return View(CreateOrder);
             }
-            //Logging incase of errors
         }
 
         //Get page of deletion
@@ -295,13 +302,14 @@ namespace Ourbnb.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            //Finds and checks order to delete, if not logs and returns notfound
+            //Finds and checks order to delete, if not logs and returns Badrequest
             var order = await _repository.getObjectById(id);
             if (order == null)
             {
                 _logger.LogError("[OrdersController] Order not found for the id {@id}", id);
-                return NotFound("Something went wrong, return to home page");
+                return BadRequest("Something went wrong, return to home page");
             }
+            //Returns view
             return View(order);
         }
 
@@ -322,6 +330,7 @@ namespace Ourbnb.Controllers
                     await UpdateRental(order.RentalId);
 
                 }
+                //Redirects to ListofOrders
                 return RedirectToAction(nameof(ListofOrders));
             }
 
