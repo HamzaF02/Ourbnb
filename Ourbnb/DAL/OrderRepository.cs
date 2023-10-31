@@ -55,47 +55,58 @@ namespace Ourbnb.DAL
                 return true;
             }catch(Exception ex)
             {
-                // 
+                // failed to delete from database
                 _logger.LogError("[OrderRepository] order deletion failed for OrderId {OrderId:0000}, error message: {ex}", id, ex.Message);
                 return false;
             }
         }
 
+        // function to get all orders 
         public async Task<IEnumerable<Order>?> GetAll()
         {
+            // try to get all order from database
             try
             {
                 return await _db.Orders.ToListAsync();
             }
             catch(Exception ex)
             {
+                // failed to get all orders
                 _logger.LogError("[OrderRepository] order ToListAsync() failed when GetAll(), error message: {ex}", ex.Message);
                 return null;
             }
         }
 
+        // function to get a order by id
         public async Task<Order?> getObjectById(int id)
         {
+            // try to get  order from database by id
             try
             {
+                // return order by id
                 return await _db.Orders.FindAsync(id);
             }
             catch (Exception ex)
             {
+                // failed to get order by id
                 _logger.LogError("[OrderRepository] order FindAsync(id) failed when GetObjectById for OrderId {OrderId:0000}, error message: {ex}", id, ex.Message);
                 return null;
             }
         }
 
+        // function to update order
         public async Task<bool> Update(Order order)
         {
+            // try to update order from database 
             try
             {
+                //update and save 
                 _db.Orders.Update(order);
                 await _db.SaveChangesAsync();
                 return true;
             }catch (Exception ex)
             {
+                // failed to update order
                 _logger.LogError("[OrderRepository] order FindAync(id) failed when updating the OrderId {OrderId:0000}, error message: {ex}", order, ex.Message);
                 return false;
             }

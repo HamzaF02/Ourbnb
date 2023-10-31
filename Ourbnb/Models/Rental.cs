@@ -26,6 +26,7 @@ namespace Ourbnb.Models
         public virtual Customer Owner { get; set; } = default!;
         public virtual List<Order>? Orders { get; set; }
 
+        // will find the avg of the rating when a rental has been given a rating in order
         internal void UpdateRating()
         {
             if(Orders == null)

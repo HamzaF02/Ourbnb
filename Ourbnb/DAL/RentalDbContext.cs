@@ -6,6 +6,7 @@ namespace Ourbnb.DAL
 {
 	public class RentalDbContext : IdentityDbContext
 	{
+		// dbcontext that uses identity and initilizes rental, customers and orders
 		public RentalDbContext(DbContextOptions<RentalDbContext> options) : base(options)
 		{
 			//Database.EnsureCreated();
