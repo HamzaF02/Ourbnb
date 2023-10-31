@@ -328,9 +328,8 @@ namespace Ourbnb.Controllers
                 if(order != null)
                 {
                     await UpdateRental(order.RentalId);
-
                 }
-                //Redirects to ListofOrders
+                //Redirects to ListofOrders+
                 return RedirectToAction(nameof(ListofOrders));
             }
 

@@ -29,7 +29,7 @@ namespace Ourbnb.Models
         // will find the avg of the rating when a rental has been given a rating in order
         internal void UpdateRating()
         {
-            if(Orders == null)
+            if(Orders == null || Orders.Count == 0)
             {
                 Rating = 0; return;
             }
