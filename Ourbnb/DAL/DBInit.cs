@@ -10,6 +10,7 @@ namespace Ourbnb.DAL
 		{
             using var serviceScope = app.ApplicationServices.CreateScope();
             RentalDbContext context = serviceScope.ServiceProvider.GetRequiredService<RentalDbContext>();
+            //Creates and delets database content
             //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
@@ -67,7 +68,7 @@ namespace Ourbnb.DAL
                         OwnerId=1,
                         FromDate=new DateTime(2023, 10, 27),
                         ToDate=new DateTime(2023, 11, 30),
-                        Image = "hytteNordkapp",
+                        Image = "/images/hytteNordkapp.jpg",
                         Rating=3,
                     },
                     new Rental
