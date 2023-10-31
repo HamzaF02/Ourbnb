@@ -4,6 +4,8 @@
 @model CreateOrder
 
 <h2>Create New Order</h2>
+
+<!-- error msg if date invalid or cration failed -->
 @if (@Model.message != null)
 {
     <p class="text-danger">@Model.message</p>
@@ -32,7 +34,7 @@
         <input asp-for="Order.To" class="form-control" min="2023-01-01" value="" type="date" />
         <span asp-validation-for="Order.To" class="text-danger"></span>
     </div>
-    
+
     <div class="form-group">
         <label asp-for="Order.Rating"></label>
         <input asp-for="Order.Rating" class="form-control" />

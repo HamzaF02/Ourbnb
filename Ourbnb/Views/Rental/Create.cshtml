@@ -7,7 +7,9 @@
 
 <h2>Create a Rental</h2>
 
-@if(@Model.message != null ){<p class="text-danger">@Model.message</p>}
+<!-- error msg if date invalid or cration failed -->
+@if (@Model.message != null)
+{<p class="text-danger">@Model.message</p>}
 <form asp-action="Create">
     <input type="hidden" asp-for="Rental.IdentityId" value="@UserManager.GetUserId(User)" />
     <div class="form-group">
